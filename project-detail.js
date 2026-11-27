@@ -2,6 +2,15 @@
   "use strict";
 
   const cases = {
+    funnel: {
+      category:"产品分析与行为数据",audience:"活动组织者、产品运营和数据工程人员",
+      summary:"看多少人查看活动、打开报名流程并最终报名成功。发现流失后，可点进事件记录核对来源和时间。",
+      images:["报名漏斗","事件明细"],
+      process:[["先看活动哪里流失","选择活动，检查各步独立访客数和转化率，再按设备和转化窗口对照。"],["亲手报名一次","在公开演练中打开活动、开始报名并确认，生成浏览器中的实际操作记录。"],["从结果回到数据","返回看板查看人数和转化的变化，再用事件明细按时序核对自己的记录。"]],
+      testTitle:"报名在哪一步流失最多？",
+      result:"41.9",unit:"%",resultLabel:"30 分钟窗口内的报名转化率",
+      resultText:"160 人查看，99 人开始报名，67 人报名成功。流失最多的是查看后未开始报名的 61 人。手机端完成 31／96，桌面端完成 36／64。先从原始事件核对口径，再决定需要排查哪一步。"
+    },
     access: {
       category:"企业平台与权限治理",audience:"临时协作人员、资源负责人和审计人员",
       summary:"为具体人员开通某份内部报表的限时访问。申请、审批、回收和访问结果都能查到。",
@@ -131,6 +140,7 @@
     ];
     if (id === "manual") links.push([p.mainURL, "下载离线工作台 HTML", "浏览器直接打开", "手册检索室.html"]);
     if (id === "access") links.push([p.mainURL, "下载离线演练 HTML", "浏览器直接打开", "企业临时权限工作台.html"]);
+    if (id === "funnel") links.push([p.mainURL, "下载离线演练 HTML", "浏览器直接打开", "产品转化分析台.html"]);
     return `<section class="pd-resources" aria-labelledby="pd-resource-title">
       <h2 id="pd-resource-title">文章与项目文件</h2>
       <ul>${links.map(([url, label, hint, download]) => `<li><a href="${url}"${typeof download === "string" ? ` download="${download}"` : download ? " download" : ""}>
@@ -150,6 +160,7 @@
     if (id === "manual") return `<a class="pd-product" href="${p.mainURL}">打开支持工作台<span aria-hidden="true">↗</span></a>`;
     if (id === "review") return `<a class="pd-product" href="${p.mainURL}">打开演示工作台<span aria-hidden="true">↗</span></a>`;
     if (id === "access") return `<a class="pd-product" href="${p.mainURL}">试用临时权限<span aria-hidden="true">↗</span></a>`;
+    if (id === "funnel") return `<a class="pd-product" href="${p.mainURL}">打开分析工作台<span aria-hidden="true">↗</span></a>`;
     if (!localPreview) return "";
     const url = id === "campus" ? p.extras.find(([label]) => label === "同实例学生端")[1] : p.mainURL;
     const label = id === "campus" ? "打开学生端" : id === "manual" ? "打开检索室" : "打开工作台";
@@ -167,8 +178,10 @@
           <p class="pd-summary">${record.summary}</p>
           <dl class="pd-facts"><div><dt>使用者</dt><dd>${record.audience}</dd></div><div><dt>技术栈</dt><dd>${p.stack}</dd></div>
             <div><dt>GitHub</dt><dd><a class="repo-link" href="${window.blogGitHub.repositories[id]}">${window.blogGitHub.repositories[id].split("/").slice(-2).join(" / ")}</a></dd></div>
+            ${id==="funnel"?'<div><dt>接入项目</dt><dd><a href="#project/campus">校园场务</a></dd></div>':""}
+            ${id==="campus"?'<div><dt>报名分析</dt><dd><a href="#project/funnel">产品转化分析台</a></dd></div>':""}
           </dl>
-          <div class="pd-actions">${productAction(id, p)}${id==="access"?"":`<a class="pd-cta" href="${sampleLink(id)}">体验交互样例<span aria-hidden="true">↓</span></a>`}<a class="pd-read" href="${source(id)}">在线读源码<span aria-hidden="true">↗</span></a></div>
+          <div class="pd-actions">${productAction(id, p)}${["access","funnel"].includes(id)?"":`<a class="pd-cta" href="${sampleLink(id)}">体验交互样例<span aria-hidden="true">↓</span></a>`}<a class="pd-read" href="${source(id)}">在线读源码<span aria-hidden="true">↗</span></a></div>
         </header>
         ${galleryMarkup(id, record)}
       </div>
@@ -178,7 +191,7 @@
       <div class="pd-explore">
         <section class="pd-sample" id="sample" aria-labelledby="pd-sample-heading"><h2 id="pd-sample-heading">交互样例</h2><div id="sample-slot"></div>${serviceLinks(p)}</section>
         <aside class="pd-evidence" aria-labelledby="pd-evidence-title">
-          <p class="pd-label">本机验证记录</p><h2 id="pd-evidence-title">${record.testTitle}</h2>
+          <p class="pd-label">${id==="funnel"?"合成样例":"本机验证记录"}</p><h2 id="pd-evidence-title">${record.testTitle}</h2>
           <div class="pd-measure"><strong>${record.result}</strong><span>${record.unit}</span></div>
           <p class="pd-measure-label">${record.resultLabel}</p><p class="pd-evidence-text">${record.resultText}</p>
         </aside>

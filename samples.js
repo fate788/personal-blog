@@ -365,7 +365,13 @@
     root.append(tag("p", "pbs-intro", "以运营同事身份申请区域经营周报，再切换到负责人审批。回到申请人视图读一次报表，推进演示时钟后，再用同一个入口检查访问结果。"), link);
   }
 
-  const samples = { campus, ledger, incident, clinic, manual, review, access };
+  function funnel(root) {
+    const link = tag("a", "button", "体验一次报名 ↗");
+    link.href = "demos/funnel/index.html#try";
+    root.append(tag("p", "pbs-intro", "先看一眼活动的样例漏斗，再打开校园活动、完成报名，回来对照刚刚增加的三条事件。"), link);
+  }
+
+  const samples = { campus, ledger, incident, clinic, manual, review, access, funnel };
   window.mountProjectSample = function (element, projectId) {
     if (!element) return;
     const root = tag("div", "pbs-sample");

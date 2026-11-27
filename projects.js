@@ -4,7 +4,7 @@ const industryNames = {campus:"校园教育",trade:"电商支付",platform:"跨�
 const groups = [
   {id:"product",name:"产品研发",roles:["backend","web","mobile"],description:"从报名、对账和门诊候补，看业务规则怎样落实到接口和用户操作。"},
   {id:"platform",name:"平台可靠性",roles:["sre","qa"],description:"从故障响应和接口回归，看异常如何被发现、验证与追溯。"},
-  {id:"data",name:"数据工程",roles:["data"],description:"从两份账单的原始行出发，核对每个金额的口径、差异与来源。"},
+  {id:"data",name:"数据工程",roles:["data"],description:"从账单原始行和行为事件出发，核对业务指标、差异与来源。"},
   {id:"ai",name:"AI 与算法",roles:["ai","algo"],description:"关注检索结果的依据、排序效果与可重复的评测。",planned:[
     ["带出处的制度问答","用固定版本的公开手册作答，核对每个引用，记录无依据问题的拒答情况。"],
     ["站内搜索评测台","固定查询与候选文档，对照关键词检索，逐条分析搜索排序的改善和退化。"]]},
@@ -15,6 +15,21 @@ industryNames.support = "产品帮助中心";
 industryNames.collaboration = "研发协作";
 industryNames.enterprise = "企业内部平台";
 const projects = {
+  funnel:{
+    name:"产品转化分析台",version:"v1.0",sector:["campus"],roles:["data","backend","web"],stack:"Node.js / SQLite / JavaScript",
+    run:"funnel-run.zip",mainURL:"demos/funnel/index.html",extras:[["本机工作台","http://127.0.0.1:8805/"]],
+    pitch:"把活动从被查看到报名成功的过程量化，找到流失最多的一环，再从原始事件核对结果。",
+    evidence:"30 分钟合成样例中，160 人查看、99 人开始报名、67 人报名成功。完成一次公开演练后，可核对新增的三条事件。",
+    features:[["连接校园场务","活动详情和报名表记录前两步，报名成功由校园场务服务端确认。"],["比较转化","按访客去重，按转化窗口检查步骤顺序，比较手机和桌面访客。"],["追查明细","从漏斗查看步骤人数和流失数，再到原始事件核对访客标识、设备和时间。"]],
+    proof:{data:"按活动、匿名访客和时间计算有序转化。重复点击不增加独立访客人数，手机和桌面分开对照。",backend:"校园场务保留业务真实结果，分析服务接收事件、校验字段及重复标识，并用 SQLite 保存。",web:"提供活动、窗口和设备筛选，图表与原始事件联动。公开演练可操作报名并看到自己新增的记录。"},
+    note:"活动报名少，流失发生在哪一步？",
+    teaser:"用校园场务的三步事件，从运营问题追到漏斗口径和原始记录。",
+    parts:[
+      ["把报名拆成三步","在校园场务里，查看活动和开始报名来自学生端的真实操作。报名成功来自服务端保存后的结果。三种事件连起来，才能知道有多少人看了活动却没有开启报名，以及有多少人打开表单却没有完成。"],
+      ["人数按相同口径计算","同一访客反复打开同一活动时，图表只计算去重人数。剩余步骤需要在相同活动和规定的时间窗口内按顺序发生。按手机和桌面分别查看，可以定位需要重点检查的一侧。"],
+      ["从图表返回事件","点击转化步骤能查看对应事件。可以用公开版先走一次隔离报名，再回事件页核对自己刚触发的记录。样本量和数据来源会影响解读，公开示例用来验证计算与交互。"]
+    ]
+  },
   access:{
     name:"企业临时权限工作台",version:"v1.0",sector:["enterprise"],roles:["security","backend","web","qa"],stack:"Node.js / SQLite / JavaScript",
     run:"access-run.zip",mainURL:"demos/access/index.html",extras:[["本机服务版","http://127.0.0.1:8801/"]],
