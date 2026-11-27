@@ -1,12 +1,13 @@
 "use strict";
 
 const host=document.getElementById("content");
+const standaloneProject=host.dataset.project;
 const gallery=document.getElementById("gallery");
 const entries=Object.entries(projects);
 const localPreview=["127.0.0.1","localhost"].includes(location.hostname) && location.port==="8795";
 const source=id=>"source/"+id+"/index.html";
 const zip=id=>"downloads/"+id+"-source.zip";
-const caseLink=id=>"#project/"+id;
+const caseLink=id=>id==="inventory"?"projects/inventory/index.html":"#project/"+id;
 const sampleLink=id=>caseLink(id)+"?view=sample";
 const noteLink=id=>"#note/"+id;
 const codePaths={manual:["engine.py",372],campus:["src/main/java/cn/campus/events/CampusEvents.java",183],ledger:["engine.py",133],incident:["monitor.py",117],clinic:["engine.py",244]};
@@ -132,9 +133,15 @@ function setGallerySize(original){
 function paint(){
   const hash=location.hash.slice(1);
   const [path,qs]=hash.split("?");
-  const currentPath=path || "home";
+  const currentPath=standaloneProject?"project/"+standaloneProject:path || "home";
   const [page,id]=currentPath.split("/");
-  const query=new URLSearchParams(qs);
+  if(!standaloneProject && page==="project" && id==="inventory"){
+    const destination=new URL(caseLink(id),location.href);
+    if(qs)destination.search=qs;
+    location.replace(destination);
+    return;
+  }
+  const query=new URLSearchParams(standaloneProject?location.search:qs);
   const group=groups.find(item=>item.id===query.get("group"));
   const isCatalog=page==="projects" || page==="catalog";
   document.querySelector(".category-band").hidden=!(isCatalog || page==="skills");
@@ -159,7 +166,7 @@ function paint(){
       if(page==="note"){
         note(id,p);title=p.note;
       }else{
-        if(lastPath!==path) window.renderProjectDetail(id,p,query.get("view"));
+        if(lastPath!==currentPath) window.renderProjectDetail(id,p,query.get("view"));
         else if(query.get("view")==="sample") document.getElementById("sample").scrollIntoView();
         title=p.name;
       }

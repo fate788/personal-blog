@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 const site = fileURLToPath(new URL("../", import.meta.url));
 const projects = ["campus", "ledger", "incident", "clinic", "manual", "review", "access", "funnel", "inventory"];
 const inventoryDemo = "demos/inventory";
-const pages = ["index.html", ...projects.map(key => `source/${key}/index.html`), inventoryDemo + "/index.html"];
+const pages = ["index.html", "projects/inventory/index.html", ...projects.map(key => `source/${key}/index.html`), inventoryDemo + "/index.html"];
 assert(statSync(path.join(site, "demos/review/index.html")).isFile(), "Missing requirements review demo");
 assert(statSync(path.join(site, "demos/manual/index.html")).isFile(), "Missing support workspace demo");
 assert(statSync(path.join(site, "demos/access/index.html")).isFile(), "Missing temporary access demo");
@@ -20,9 +20,13 @@ for (const {src} of inventoryManifest.icons) {
 }
 for (const page of pages) {
   const html = readFileSync(path.join(site, page), "utf8");
-  for (const [, url] of html.matchAll(/\b(?:href|src)="([^"]+)"/g)) {
+  const baseTag = html.match(/<base href="([^"]+)">/);
+  const pageDirectory = path.dirname(path.join(site, page));
+  const root = baseTag ? path.dirname(path.resolve(pageDirectory, baseTag[1])) : pageDirectory;
+  if (baseTag) assert(statSync(path.resolve(pageDirectory, baseTag[1])).isFile(), `${page} references a missing base file`);
+  for (const [, url] of html.replace(baseTag?.[0] || "", "").matchAll(/\b(?:href|src)="([^"]+)"/g)) {
     if (/^(?:[a-z]+:|#)/i.test(url)) continue;
-    const target = path.resolve(site, path.dirname(page), url.split(/[?#]/, 1)[0]);
+    const target = path.resolve(root, url.split(/[?#]/, 1)[0]);
     assert(statSync(target).isFile(), `${page} references a missing file: ${url}`);
   }
 }
