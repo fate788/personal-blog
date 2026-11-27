@@ -14,7 +14,7 @@ const deepCode=id=>source(id)+"#"+new URLSearchParams({file:codePaths[id][0],lin
 const runtime={manual:"在线版可直接使用，手册和问题保存在当前浏览器。本地版需要 Python 3.10 或以上，解压后运行 start-manual.cmd 或 python server.py，默认端口 8799。手册版本和问题记录保存在 SQLite，可接本地模型。",campus:"Java 17 或以上，解压后运行 start-review.cmd，默认端口 8768。",ledger:"Python 3.10 或以上，解压后运行 start-review.cmd，默认端口 8792。",incident:"Python 3.10 或以上，解压后运行 start-incident.cmd，默认端口 8793。隔离演练可独立使用。",clinic:"解压后在项目目录运行 python server.py，默认端口 8796。排班和预约使用合成演示数据。"};
 const captions={
   review:["虚构企业 IT 服务台的项目概览、需求版本和待复核问题。","在审查清单中打开 SLA 计时冲突，同时核对两个条款的原文。"],
-  manual:["支持工作台内可查证手册、导入资料并跟进待补问题。","设备续借问题完成复核，结案条目关联修订版手册的出处。"],
+  manual:["从工作台直接查看演示答案，也可导入自己的手册后开始查询。","设备续借问题完成复核，结案记录保留修订版手册的引用段落。"],
   clinic:["预约日程，12 月 8 日有四个号源可约。","预约查询页展开状态菜单，可筛选已预约、候补中和限时留位等记录。"],
   campus:["学生端活动大厅和可报名的样例分享会。","发布端的限时六位码、二维码与现场报名名单。"],
   ledger:["两份样例分别有 8 行和 6 行，3 项一致，5 项待复核。","000127 两侧第 4 行的 128 元和 118 元，以及已保存的演示复核结论。"],
