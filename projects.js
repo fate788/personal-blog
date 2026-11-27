@@ -14,11 +14,11 @@ const groups = [
 ];
 const projects = {
   clinic:{
-    name:"门诊候补与改约工作台", version:"v0.4", sector:["health"], roles:["backend","web","qa"],
+    name:"门诊候补与改约工作台", version:"v0.5", sector:["health"], roles:["backend","web","qa"],
     stack:"Python / SQLite / JavaScript", run:"clinic-run.zip",
     pitch:"按出诊日期查余号、跨日登记，沿预约单查看候补留位和改约经过。",
     evidence:"12 个虚构编号同时登记最后一席，最终 1 人已约、11 人候补。",
-    mainURL:"http://127.0.0.1:8796/?v=4#schedule", extras:[],
+    mainURL:"http://127.0.0.1:8796/?v=5#schedule", extras:[],
     features:[["跨日登记与查单","从窗口选择开放班次，按就诊编号或预约单号查回状态与办理经过。"],["候补递补与确认","号源释放后为队首保留十分钟，到期递补下一位。"],["停诊与改约","查看待改约名单，按可用号源处理一条或一批预约。"]],
     proof:{backend:"取消、限时保留与确认写入 SQLite 事务。在同一批改约中，即便后面一条预约发生冲突，前面已经更新的记录也会回滚。",web:"按日期和科室联动显示余号与班次。从其他页面也能登记，再用预约编号追查这笔业务的状态变化。",qa:"15 项自动化测试覆盖边界时刻、并发占号、整批回滚等场景。12 个虚构编号同时登记一席，最终 1 人已约、11 人候补。"},
     note:"候补到期的那一刻，号源该给谁？",teaser:"沿着一席号源的去向，看排队、确认期限和停诊改约怎样共享容量约束。",
