@@ -13,12 +13,12 @@ const codePaths={campus:["src/main/java/cn/campus/events/CampusEvents.java",183]
 const deepCode=id=>source(id)+"#"+new URLSearchParams({file:codePaths[id][0],line:codePaths[id][1]});
 const runtime={campus:"Java 17 或以上，解压后运行 start-review.cmd，默认端口 8768。",ledger:"Python 3.10 或以上，解压后运行 start-review.cmd，默认端口 8792。",incident:"Python 3.10 或以上，解压后运行 start-incident.cmd，默认端口 8793。隔离演练可独立使用。",clinic:"解压后在项目目录运行 python server.py，默认端口 8796。排班和预约使用合成演示数据。"};
 const captions={
-  clinic:["S01 综合门诊的 2 席均已约，R003 与 R004 按登记顺序候补。","S01 停诊后，R001 和 R002 待改约，接收班次 S02 同科且尚余 2 席。"],
+  clinic:["12 月 8 日的门诊日程。选中的 S01 在 09:00 开诊，两席均已预约，R003 和 R004 正在候补。","S01 停诊后，窗口选中 R001 和 R002，准备将两笔预约转至同科的 S02。"],
   campus:["学生端活动大厅和可报名的样例分享会。","发布端的限时六位码、二维码与现场报名名单。"],
   ledger:["两份样例分别有 8 行和 6 行，3 项一致，5 项待复核。","000127 两侧第 4 行的 128 元和 118 元，以及已保存的演示复核结论。"],
   incident:["独立演练服务返回 HTTP 200，最早任务已等 95 秒，同时双账探针正常。","一次隔离演练的首次异常、签收、解除和连续健康确认。"]
 };
-const images=(id,detail=false)=>"images/"+id+"-"+(detail?"detail":"main")+".webp";
+const images=(id,detail=false)=>"images/"+id+"-"+(detail?"detail":"main")+".webp?v="+projects[id].version;
 const textLink=(url,label)=>'<a class="textlink" href="'+url+'">'+label+'</a>';
 const button=(url,label,primary=false,download=false)=>'<a class="button'+(primary?' primary':'')+'" href="'+url+'"'+(download?' download':'')+'>'+label+'</a>';
 const routeTo=(role="",industry="",group="")=>{

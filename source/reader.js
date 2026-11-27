@@ -84,7 +84,8 @@ function loadFile(file) {
     numberLink.title="定位到第 "+number+" 行";
     numberLink.setAttribute("aria-label","第 "+number+" 行");
     numberLink.tabIndex=-1;
-    row.append(numberLink,make("code",text));
+    const preview=file.path.endsWith(".css") ? text.replace(/data:font\/woff2;base64,[A-Za-z0-9+/=]+/g,"data:font/woff2;base64,〔字体数据已折叠，复制文件或下载可获取完整原文〕") : text;
+    row.append(numberLink,make("code",preview));
     content.append(row);
   }
   id("source").replaceChildren(content);

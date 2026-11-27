@@ -14,9 +14,9 @@ const groups = [
 ];
 const projects = {
   clinic:{
-    name:"门诊候补与改约工作台", version:"v0.1", sector:["health"], roles:["backend","qa"],
+    name:"门诊候补与改约工作台", version:"v0.2", sector:["health"], roles:["backend","qa"],
     stack:"Python / SQLite / JavaScript", run:"clinic-run.zip",
-    pitch:"号源释放后按顺序为候补者留位，停诊时按同科余量重新安排受影响的预约。",
+    pitch:"按出诊日期查看班次和候补顺序，退号后为队首留位，停诊时为受影响的预约安排新时段。",
     evidence:"12 个虚构编号同时登记最后一席，最终 1 人已约、11 人候补。",
     mainURL:"http://127.0.0.1:8796/", extras:[],
     features:[["候补递补与确认","号源释放后为队首保留十分钟，到期递补下一位。"],["停诊与改约","查看待改约名单，按可用号源处理一条或一批预约。"]],
