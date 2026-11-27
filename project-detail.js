@@ -11,12 +11,12 @@
       resultText:"打开第 26 行和第 29 行。前一处要求 P1 等待时继续计时，后一处要求等待用户时暂停。两段上下文均可查看。"
     },
     manual: {
-      category:"产品知识库与检索",audience:"使用产品的访客和支持人员",
-      summary:"输入问题，阅读简答，再点开支持它的手册原句。可按产品收窄范围，并在固定题集里查看检索表现。",
-      images:["手册问答","核对引用"],
-      process:[["描述遇到的问题","用自己的话提问，按需要选择门诊或双账手册。"],["核对原文","展开引用，查看版本、原句和行号，继续阅读同一手册。"],["检查检索表现","在评测中对照同一道问题的两个结果，检查漏掉的条款和错误回答。"]],
-      testTitle:"两种检索方法，用同一组什么问题比较？",result:"30",unit:"题",resultLabel:"开发期间独立标注并冻结的验收问题",
-      resultText:"覆盖明确条款、不同说法、多条件限制和资料缺失。报告保留逐题结果，点击即可复查。"
+      category:"企业支持知识库",audience:"一线支持人员与手册维护者",
+      summary:"查现行条款，答复员工或客户。资料缺失时，支持人员可以登记问题，维护者发布修订后用具体段落结案。",
+      images:["支持工作台","问题与结案依据"],
+      process:[["带着问题查手册","选定手册，核对引用，再复制带出处的答复。"],["记录未解问题","例如员工来问备用电脑能续借几天，手册暂缺这一条，就将原问题加入待补清单。"],["发布修订并结案","把条款写进新版手册，用对应段落处理待补问题，交班时可导出清单。"]],
+      testTitle:"手册修订后，旧版的依据还能找回吗？",result:"2",unit:"版",resultLabel:"示例设备借用手册的初版与修订版",
+      resultText:"从登记续借问题，到发布补充条款，再到绑定新版原文结案。两次发布都保留版本和段落，历史引用可独立打开。"
     },
     clinic: {
       category: "门诊预约调度",
@@ -120,9 +120,10 @@
       [zip(id), "下载源码 ZIP", "项目源文件", true],
       ["downloads/" + p.run, "下载完整运行包", "本地启动", true]
     ];
+    if (id === "manual") links.push([p.mainURL, "下载离线工作台 HTML", "浏览器直接打开", "手册检索室.html"]);
     return `<section class="pd-resources" aria-labelledby="pd-resource-title">
       <h2 id="pd-resource-title">文章与项目文件</h2>
-      <ul>${links.map(([url, label, hint, download]) => `<li><a href="${url}"${download ? " download" : ""}>
+      <ul>${links.map(([url, label, hint, download]) => `<li><a href="${url}"${typeof download === "string" ? ` download="${download}"` : download ? " download" : ""}>
         <span><small>${hint}</small><b>${label}</b></span><span class="pd-arrow" aria-hidden="true">${download ? "↓" : "→"}</span>
       </a></li>`).join("")}</ul>
       <p class="pd-requirements">${runtime[id]}</p>
@@ -136,6 +137,7 @@
   }
 
   function productAction(id, p) {
+    if (id === "manual") return `<a class="pd-product" href="${p.mainURL}">打开支持工作台<span aria-hidden="true">↗</span></a>`;
     if (id === "review") return `<a class="pd-product" href="${p.mainURL}">打开演示工作台<span aria-hidden="true">↗</span></a>`;
     if (!localPreview) return "";
     const url = id === "campus" ? p.extras.find(([label]) => label === "同实例学生端")[1] : p.mainURL;
