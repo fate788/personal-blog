@@ -32,3 +32,18 @@
 @media(max-width:500px){.pbs-sample .pbs-option{padding-inline:9px}.pbs-sample .pbs-clock li span{font-size:11px}.pbs-sample .pbs-result{padding:9px 11px}}
 .pbs-sample .pbs-options.pbs-clinic-actions {margin:12px 0 0}
 .pbs-clinic-actions [hidden] {display:none}
+.pbs-manual-form{display:flex;gap:8px;align-items:end}
+.pbs-manual-form .pbs-field{min-width:0;flex:1}
+.pbs-sample .pbs-manual-query{appearance:none;width:100%;border:1px solid #bcb6a8;border-radius:4px;background:#fffefb;color:var(--pbs-ink);font:inherit;font-size:14px;min-height:39px;padding:7px 10px}
+.pbs-manual-query:focus-visible,.pbs-manual-hit summary:focus-visible{outline:2px solid var(--pbs-brass);outline-offset:2px}
+.pbs-manual-count{margin:15px 0 5px;color:var(--pbs-muted);font-size:12px}
+.pbs-manual-hit{border-top:1px solid var(--pbs-line);padding:8px 0;font-size:13px}
+.pbs-manual-hit summary{cursor:pointer;font-weight:600;color:var(--pbs-ink);padding:3px 0}
+.pbs-manual-hit p{white-space:pre-line;overflow-wrap:anywhere;margin:5px 0}
+.pbs-manual-hit a{color:var(--pbs-brass)}
+.pbs-quoted{border-left:2px solid #a9916f;margin:10px 0;padding:5px 11px;background:#f2ede4;color:#322d26}
+.pbs-criteria{margin-top:8px}
+.pbs-criteria[hidden],.pbs-sample button[hidden],.pbs-sample .pbs-result[hidden]{display:none}
+.pbs-criteria-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));gap:8px 12px}
+.pbs-criteria-fields input{display:block;width:100%;min-width:0;min-height:36px;padding:6px 8px;font:inherit;font-size:13px;color:inherit;border:1px solid #bcb6a8;border-radius:4px;background:#fffefb}
+.pbs-criteria .pbs-intro{margin-bottom:6px}

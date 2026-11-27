@@ -1,9 +1,13 @@
 # 李子衡的个人博客
 
+[访问作品博客](https://fate788.github.io/personal-blog/) · [在线体验需求审查工作台](https://fate788.github.io/personal-blog/demos/review/)
+
 你好，我是李子衡，一名计算机专业学生。这里收录了我的开发作品和技术文章。每个项目都有截图、可操作的样例，以及对应的实现代码。[我的 GitHub 主页](https://github.com/fate788)
 
 | 作品 | 可以体验的内容 | 独立源码仓库 |
 | --- | --- | --- |
+| 需求审查工作台 | 从需求原句跟踪问题复核、验收条件与交付依据 | [requirements-review-workbench](https://github.com/fate788/requirements-review-workbench) |
+| 手册检索室 | 用自己的问法查产品手册，点开引用核对原文，查看固定题集的评测结果 | [manual-search](https://github.com/fate788/manual-search) |
 | 校园场务 | 从学生报名到现场签到，查看签到时段对结果的影响 | [campus-events](https://github.com/fate788/campus-events) |
 | 双账核对工作台 | 核对两份样例账单，查看原始行并填写复核意见 | [ledger-reconciliation](https://github.com/fate788/ledger-reconciliation) |
 | 故障响应工作台 | 跟随一次任务积压演练，回看告警和恢复记录 | [incident-response](https://github.com/fate788/incident-response) |

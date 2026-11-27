@@ -2,6 +2,22 @@
   "use strict";
 
   const cases = {
+    review: {
+      category:"需求质量与研发协作",audience:"需求作者、测试人员与项目负责人",
+      summary:"审查同一文档的不同版本，从候选问题定位到原文，保留人工复核和修订结果。演示采用虚构服务台项目。",
+      images:["项目概览","问题与原文"],
+      process:[["选择需求版本","打开已有文档，确认版本和本次使用的审查规则。"],["回看原文","在问题清单中查看冲突或缺失的验收条件，分别定位关联的条款。"],["决定如何处理","核对后确认或排除问题，保留理由，继续检查修订版本。"]],
+      testTitle:"一条计时冲突，能核对到哪两处？",result:"2",unit:"处原文",resultLabel:"演示文档中的同一条 SLA 冲突",
+      resultText:"打开第 26 行和第 29 行。前一处要求 P1 等待时继续计时，后一处要求等待用户时暂停。两段上下文均可查看。"
+    },
+    manual: {
+      category:"产品知识库与检索",audience:"使用产品的访客和支持人员",
+      summary:"输入问题，阅读简答，再点开支持它的手册原句。可按产品收窄范围，并在固定题集里查看检索表现。",
+      images:["手册问答","核对引用"],
+      process:[["描述遇到的问题","用自己的话提问，按需要选择门诊或双账手册。"],["核对原文","展开引用，查看版本、原句和行号，继续阅读同一手册。"],["检查检索表现","在评测中对照同一道问题的两个结果，检查漏掉的条款和错误回答。"]],
+      testTitle:"两种检索方法，用同一组什么问题比较？",result:"30",unit:"题",resultLabel:"开发期间独立标注并冻结的验收问题",
+      resultText:"覆盖明确条款、不同说法、多条件限制和资料缺失。报告保留逐题结果，点击即可复查。"
+    },
     clinic: {
       category: "门诊预约调度",
       audience: "门诊排班与预约窗口人员",
@@ -120,9 +136,10 @@
   }
 
   function productAction(id, p) {
+    if (id === "review") return `<a class="pd-product" href="${p.mainURL}">打开演示工作台<span aria-hidden="true">↗</span></a>`;
     if (!localPreview) return "";
     const url = id === "campus" ? p.extras.find(([label]) => label === "同实例学生端")[1] : p.mainURL;
-    const label = id === "campus" ? "打开学生端" : "打开工作台";
+    const label = id === "campus" ? "打开学生端" : id === "manual" ? "打开检索室" : "打开工作台";
     return `<a class="pd-product" href="${url}">${label}<span aria-hidden="true">↗</span></a>`;
   }
 

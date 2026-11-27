@@ -9,16 +9,20 @@ const zip=id=>"downloads/"+id+"-source.zip";
 const caseLink=id=>"#project/"+id;
 const sampleLink=id=>caseLink(id)+"?view=sample";
 const noteLink=id=>"#note/"+id;
-const codePaths={campus:["src/main/java/cn/campus/events/CampusEvents.java",183],ledger:["engine.py",133],incident:["monitor.py",117],clinic:["engine.py",244]};
+const codePaths={manual:["engine.py",322],campus:["src/main/java/cn/campus/events/CampusEvents.java",183],ledger:["engine.py",133],incident:["monitor.py",117],clinic:["engine.py",244]};
 const deepCode=id=>source(id)+"#"+new URLSearchParams({file:codePaths[id][0],line:codePaths[id][1]});
-const runtime={campus:"Java 17 或以上，解压后运行 start-review.cmd，默认端口 8768。",ledger:"Python 3.10 或以上，解压后运行 start-review.cmd，默认端口 8792。",incident:"Python 3.10 或以上，解压后运行 start-incident.cmd，默认端口 8793。隔离演练可独立使用。",clinic:"解压后在项目目录运行 python server.py，默认端口 8796。排班和预约使用合成演示数据。"};
+const runtime={manual:"Python 3.10 或以上。解压后运行 start-manual.cmd 或 python server.py，默认端口 8799。两份手册和离线检索均随包提供。",campus:"Java 17 或以上，解压后运行 start-review.cmd，默认端口 8768。",ledger:"Python 3.10 或以上，解压后运行 start-review.cmd，默认端口 8792。",incident:"Python 3.10 或以上，解压后运行 start-incident.cmd，默认端口 8793。隔离演练可独立使用。",clinic:"解压后在项目目录运行 python server.py，默认端口 8796。排班和预约使用合成演示数据。"};
 const captions={
+  review:["虚构企业 IT 服务台的项目概览、需求版本和待复核问题。","在审查清单中打开 SLA 计时冲突，同时核对两个条款的原文。"],
+  manual:["从自己的问题开始，选择手册范围。","查看回答与固定版本的来源原句。"],
   clinic:["预约日程，12 月 8 日有四个号源可约。","预约查询页展开状态菜单，可筛选已预约、候补中和限时留位等记录。"],
   campus:["学生端活动大厅和可报名的样例分享会。","发布端的限时六位码、二维码与现场报名名单。"],
   ledger:["两份样例分别有 8 行和 6 行，3 项一致，5 项待复核。","000127 两侧第 4 行的 128 元和 118 元，以及已保存的演示复核结论。"],
   incident:["独立演练服务返回 HTTP 200，最早任务已等 95 秒，同时双账探针正常。","一次隔离演练的首次异常、签收、解除和连续健康确认。"]
 };
 const images=(id,detail=false)=>"images/"+id+"-"+(detail?"detail":"main")+".webp?v="+projects[id].version;
+codePaths.review = ["backend/src/main/java/studio/reqaudit/ReviewService.java",432];
+runtime.review = "浏览器演示可直接打开，使用虚构的 IT 服务台项目。完整运行包的构建和启动步骤见 README。";
 const textLink=(url,label)=>'<a class="textlink" href="'+url+'">'+label+'</a>';
 const button=(url,label,primary=false,download=false)=>'<a class="button'+(primary?' primary':'')+'" href="'+url+'"'+(download?' download':'')+'>'+label+'</a>';
 const routeTo=(role="",industry="",group="")=>{

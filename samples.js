@@ -225,7 +225,141 @@
     reset();
   }
 
-  const samples = { campus, ledger, incident, clinic };
+  function manual(root) {
+    title(root, "直接查手册原文", "用词语或编号查这两份固定版本的手册。展开结果即可核对原文，离线也能使用。");
+    const corpus = window.manualSampleCorpus;
+    const form = tag("form", "pbs-review pbs-manual-form");
+    const label = tag("label", "pbs-field");
+    const input = tag("input", "pbs-manual-query");
+    input.type = "search";
+    input.required = true;
+    input.maxLength = 160;
+    input.value = "10 分钟留位";
+    input.placeholder = "如：留位、前导零、R001";
+    label.append(tag("span", "pbs-label", "查询词或编号"), input);
+    const submit = button("查原文", "pbs-submit");
+    submit.type = "submit";
+    form.append(label, submit);
+    const output = tag("div", "pbs-manual-output");
+    const notice = tag("p", "pbs-manual-count");
+    notice.setAttribute("role", "status");
+    const list = tag("div");
+    output.append(notice, list);
+    let scope = "all";
+    const scopes = ["all", "clinic", "ledger"];
+    const filters = actions(["全部手册", "门诊预约", "双账核对"], i => {
+      scope = scopes[i];
+      filters.mark(i);
+      searchText();
+    }, "选择手册范围");
+    filters.mark(0);
+    root.append(filters.group, form, output);
+
+    function terms(text) {
+      const parts = text.normalize("NFKC").toLowerCase().match(/[\u3400-\u9fff]+|[a-z0-9]+(?:[._/-][a-z0-9]+)*/g) || [];
+      const result = new Set();
+      for (const part of parts) {
+        if (/^[a-z0-9]/.test(part) || part.length === 1) result.add(part);
+        else for (let i = 0; i < part.length - 1; i++) result.add(part.slice(i, i + 2));
+      }
+      return result;
+    }
+    const indexed = corpus.map(section => ({section, words:terms(section.text)}));
+    function searchText() {
+      const query = input.value.trim().normalize("NFKC").toLowerCase();
+      const words = [...terms(query)];
+      const pool = indexed.filter(row => scope === "all" || row.section.project === scope);
+      const weights = words.map(word => Math.log(1 + indexed.length / (1 + indexed.filter(row => row.words.has(word)).length)));
+      const hits = pool.map(({section, words:available}) => {
+        const score = words.reduce((sum, word, i) => sum + (available.has(word) ? weights[i] : 0), 0);
+        return {section, score:score + (query && section.text.toLowerCase().includes(query) ? 5 : 0)};
+      }).filter(row => row.score > 0).sort((a, b) => b.score - a.score).slice(0, 3);
+      notice.textContent = hits.length ? "匹配原文 · " + hits.length + " 段" : "没有找到匹配的原文，可换一个词或编号。";
+      list.replaceChildren();
+      for (const [i, {section}] of hits.entries()) {
+        const details = tag("details", "pbs-manual-hit");
+        details.open = i === 0;
+        const range = section.start === section.end ? String(section.start) : section.start + "–" + section.end;
+        const summary = tag("summary", "", section.document + " · 第 " + range + " 行");
+        const passage = tag("p", "", section.text);
+        const link = tag("a", "textlink", section.version + " · GitHub 原文 ↗");
+        link.href = section.url;
+        link.target = "_blank";
+        link.rel = "noopener";
+        details.append(summary, passage, link);
+        list.append(details);
+      }
+    }
+    form.addEventListener("submit", event => {event.preventDefault(); searchText();});
+    searchText();
+  }
+
+  function review(root) {
+    title(root, "把一句“系统响应要快”改成验收条款", "合成样例。先检查原句，再填写可测试的业务条件并保存一条修订草案。");
+    const original = tag("blockquote", "pbs-quoted", "系统响应要快。");
+    const inspect = button("核对原句", "pbs-submit");
+    const editor = tag("div", "pbs-criteria");
+    editor.hidden = true;
+    const missing = tag("p", "pbs-intro", "原句没有指定要测试的操作、负载和合格的响应时间。");
+    const fill = button("填入示例条件", "pbs-option");
+    const form = tag("form", "pbs-review");
+    const group = tag("div", "pbs-criteria-fields");
+    function field(caption, kind, placeholder) {
+      const label = tag("label", "pbs-field");
+      const input = tag("input");
+      input.type = kind;
+      input.placeholder = placeholder;
+      input.required = true;
+      input.maxLength = 65;
+      if (kind === "number") { input.min = "1"; input.max = "600000"; input.step = "1"; }
+      label.append(tag("span", "pbs-label", caption), input);
+      group.append(label);
+      return input;
+    }
+    const action = field("要测试的操作", "text", "如：查询工单详情");
+    const load = field("测试负载", "text", "如：50 个并发用户");
+    const limit = field("P95 响应时间上限（毫秒）", "number", "如：800");
+    const save = button("生成验收草案", "pbs-submit");
+    save.type = "submit";
+    const draft = resultBox();
+    draft.hidden = true;
+    form.append(group, save);
+    editor.append(missing, fill, form, draft);
+    root.append(original, inspect, editor);
+    inspect.addEventListener("click", () => {
+      editor.hidden = false;
+      inspect.hidden = true;
+      fill.focus();
+    });
+    fill.addEventListener("click", () => {
+      action.value = "查询工单详情";
+      load.value = "50 个并发用户";
+      action.setCustomValidity("");
+      load.setCustomValidity("");
+      limit.value = "800";
+      draft.hidden = true;
+      save.focus();
+    });
+    form.addEventListener("input", () => {
+      draft.hidden = true;
+      action.setCustomValidity("");
+      load.setCustomValidity("");
+    });
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+      if (!action.value.trim() || !load.value.trim()) {
+        const blank = !action.value.trim() ? action : load;
+        blank.setCustomValidity("请填写可以用于测试的条件。");
+        blank.reportValidity();
+        return;
+      }
+      draft.replaceChildren(tag("strong", "", "修订草案"), tag("p", "", "在"+load.value.trim()+"的负载下，"+action.value.trim()+"的 P95 响应时间应不超过 "+limit.value+" 毫秒。"),
+        tag("p", "pbs-intro", "这是待确认的验收目标。实际性能需要通过测试测量。"));
+      draft.hidden = false;
+    });
+  }
+
+  const samples = { campus, ledger, incident, clinic, manual, review };
   window.mountProjectSample = function (element, projectId) {
     if (!element) return;
     const root = tag("div", "pbs-sample");
