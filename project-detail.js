@@ -2,6 +2,15 @@
   "use strict";
 
   const cases = {
+    inventory: {
+      category:"移动端与仓储作业",audience:"现场盘点员、复点员与仓库主管",
+      summary:"仓员在货架边直接点货。离线保存结果，网络恢复后再补传。有分歧时，主管能核对两份原始记录及处理理由。",
+      images:["移动盘点","差异复核"],
+      process:[["离线记录 23 卷","以第一位盘点员身份打开 A01 包材架，给牛皮纸封箱胶带填写实点数量，断网时先保存在设备上。"],["联网补传并复点","恢复连接后同步队列。切换到第二位盘点员，独立录入 24 卷。"],["复核差异并留档","主管在同一条目查看 23、24 两份记录和 24 卷账面数，填写依据并确认 24 卷。"]],
+      testTitle:"两份盘点记录如何对上？",
+      result:"24",unit:"卷",resultLabel:"样例中主管复点确认的数量",
+      resultText:"第一位仓员的 23 卷与第二位的 24 卷分别保留。重复补传沿用原回执，主管复核也不会改写原始记录。"
+    },
     funnel: {
       category:"产品分析与行为数据",audience:"活动组织者、产品运营和数据工程人员",
       summary:"先看整体报名转化和流失最多的一环，再沿漏斗打开匿名访客的事件，核对他们走到了哪一步。",
@@ -161,6 +170,7 @@
     if (id === "review") return `<a class="pd-product" href="${p.mainURL}">打开演示工作台<span aria-hidden="true">↗</span></a>`;
     if (id === "access") return `<a class="pd-product" href="${p.mainURL}">试用临时权限<span aria-hidden="true">↗</span></a>`;
     if (id === "funnel") return `<a class="pd-product" href="${p.mainURL}">打开分析工作台<span aria-hidden="true">↗</span></a>`;
+    if (id === "inventory") return `<a class="pd-product" href="${p.mainURL}">打开盘点工作台<span aria-hidden="true">↗</span></a>`;
     if (!localPreview) return "";
     const url = id === "campus" ? p.extras.find(([label]) => label === "同实例学生端")[1] : p.mainURL;
     const label = id === "campus" ? "打开学生端" : id === "manual" ? "打开检索室" : "打开工作台";
@@ -181,7 +191,7 @@
             ${id==="funnel"?'<div><dt>接入项目</dt><dd><a href="#project/campus">校园场务</a></dd></div>':""}
             ${id==="campus"?'<div><dt>报名分析</dt><dd><a href="#project/funnel">产品转化分析台</a></dd></div>':""}
           </dl>
-          <div class="pd-actions">${productAction(id, p)}${["access","funnel"].includes(id)?"":`<a class="pd-cta" href="${sampleLink(id)}">体验交互样例<span aria-hidden="true">↓</span></a>`}<a class="pd-read" href="${source(id)}">在线读源码<span aria-hidden="true">↗</span></a></div>
+          <div class="pd-actions">${productAction(id, p)}${["access","funnel","inventory"].includes(id)?"":`<a class="pd-cta" href="${sampleLink(id)}">体验交互样例<span aria-hidden="true">↓</span></a>`}<a class="pd-read" href="${source(id)}">在线读源码<span aria-hidden="true">↗</span></a></div>
         </header>
         ${galleryMarkup(id, record)}
       </div>
@@ -191,7 +201,7 @@
       <div class="pd-explore">
         <section class="pd-sample" id="sample" aria-labelledby="pd-sample-heading"><h2 id="pd-sample-heading">交互样例</h2><div id="sample-slot"></div>${serviceLinks(p)}</section>
         <aside class="pd-evidence" aria-labelledby="pd-evidence-title">
-          <p class="pd-label">${id==="funnel"?"合成样例":"本机验证记录"}</p><h2 id="pd-evidence-title">${record.testTitle}</h2>
+          <p class="pd-label">${["funnel","inventory"].includes(id)?"合成样例":"本机验证记录"}</p><h2 id="pd-evidence-title">${record.testTitle}</h2>
           <div class="pd-measure"><strong>${record.result}</strong><span>${record.unit}</span></div>
           <p class="pd-measure-label">${record.resultLabel}</p><p class="pd-evidence-text">${record.resultText}</p>
         </aside>

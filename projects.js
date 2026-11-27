@@ -2,7 +2,7 @@
 const roleNames = {backend:"业务后端",web:"Web 前端",mobile:"移动客户端",sre:"运维开发 / SRE",qa:"测试开发",data:"数据工程",ai:"AI 应用",algo:"搜索与推荐算法",security:"应用安全与隐私"};
 const industryNames = {campus:"校园教育",trade:"电商支付",platform:"跨行业运维平台",health:"智慧医疗",logistics:"物流与本地生活",content:"内容推荐",iot:"物联网"};
 const groups = [
-  {id:"product",name:"产品研发",roles:["backend","web","mobile"],description:"从报名、对账和门诊候补，看业务规则怎样落实到接口和用户操作。"},
+  {id:"product",name:"产品研发",roles:["backend","web","mobile"],description:"从移动盘点、活动报名和门诊候补，看业务规则怎样落实到现场操作和接口。"},
   {id:"platform",name:"平台可靠性",roles:["sre","qa"],description:"从故障响应和接口回归，看异常如何被发现、验证与追溯。"},
   {id:"data",name:"数据工程",roles:["data"],description:"从账单原始行和行为事件出发，核对业务指标、差异与来源。"},
   {id:"ai",name:"AI 与算法",roles:["ai","algo"],description:"关注检索结果的依据、排序效果与可重复的评测。",planned:[
@@ -15,6 +15,21 @@ industryNames.support = "产品帮助中心";
 industryNames.collaboration = "研发协作";
 industryNames.enterprise = "企业内部平台";
 const projects = {
+  inventory:{
+    name:"移动盘点工作台",version:"v1.0",sector:["logistics"],roles:["mobile","backend","web"],stack:"可安装 Web 应用（PWA） / IndexedDB / Node.js / SQLite",
+    run:"inventory-run.zip",mainURL:"demos/inventory/index.html",extras:[["本机工作台","http://127.0.0.1:8808/"]],
+    pitch:"仓员现场盲盘，断网时仍可保存实点数量。复联后补传，主管对照两条原记录和账面数量复核差异。",
+    evidence:"A01 的胶带按两份独立记录复核。第一位盘点员报 23 卷，第二位报 24 卷，主管复点确认 24 卷，两份记录仍可核对。",
+    features:[["离线点货","按库位与商品编码找到盘点项，断网先将结果加入设备上的待同步队列。"],["独立复点","两位盘点员独立登记，操作时看不到账面数量或对方记录。"],["差异复核","主管核对实点与账面，填写复点依据并确认最终数量，保留历史。"]],
+    proof:{mobile:"用 Service Worker 缓存界面，IndexedDB 保存设备上的待同步记录。页面重开后可以接着提交。",backend:"按操作编号识别补传和重试，原始记录留档。同一盘点项的复核带版本校验，后到的旧决定不会覆盖结果。",web:"移动端呈现盘点任务、待同步队列和主管复核视图。公开演练可在同一浏览器切换角色并模拟断网。"},
+    note:"断网时记录的 23 卷，联网后怎样复核？",
+    teaser:"跟着仓员、复点员和主管，查看一笔弱网盘点怎样入库并保留原始记录。",
+    parts:[
+      ["先保住仓员记录","仓员选择 A01 库位，按 SKU 找到牛皮纸封箱胶带。即使暂时离线，也可以记录现场数到的 23 卷，之后由设备补传。"],
+      ["保留独立复点结果","另一位仓员独立提交 24 卷。盘点阶段只显示自己的提交情况。两份结果不一致，主管收到待复核任务。"],
+      ["写清最后为何确认","主管核对两份原记录和 24 卷账面数，按现场复点结果及理由作决定。原始观察和复核记录都能查回。"]
+    ]
+  },
   funnel:{
     name:"产品转化分析台",version:"v1.1",sector:["campus"],roles:["data","backend","web"],stack:"Node.js / SQLite / JavaScript",
     run:"funnel-run.zip",mainURL:"demos/funnel/index.html",extras:[["本机工作台","http://127.0.0.1:8805/"]],

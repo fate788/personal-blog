@@ -5,12 +5,19 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const site = fileURLToPath(new URL("../", import.meta.url));
-const projects = ["campus", "ledger", "incident", "clinic", "manual", "review", "access", "funnel"];
-const pages = ["index.html", ...projects.map(key => `source/${key}/index.html`)];
+const projects = ["campus", "ledger", "incident", "clinic", "manual", "review", "access", "funnel", "inventory"];
+const inventoryDemo = "demos/inventory";
+const pages = ["index.html", ...projects.map(key => `source/${key}/index.html`), inventoryDemo + "/index.html"];
 assert(statSync(path.join(site, "demos/review/index.html")).isFile(), "Missing requirements review demo");
 assert(statSync(path.join(site, "demos/manual/index.html")).isFile(), "Missing support workspace demo");
 assert(statSync(path.join(site, "demos/access/index.html")).isFile(), "Missing temporary access demo");
 assert(statSync(path.join(site, "demos/funnel/index.html")).isFile(), "Missing product funnel demo");
+const inventoryManifest = JSON.parse(readFileSync(path.join(site, inventoryDemo, "manifest.webmanifest"), "utf8"));
+assert(inventoryManifest.icons.some(icon => icon.sizes === "192x192"), "Missing inventory app icon");
+assert(inventoryManifest.icons.some(icon => icon.sizes === "512x512"), "Missing inventory installation icon");
+for (const {src} of inventoryManifest.icons) {
+  assert(statSync(path.join(site, inventoryDemo, src)).isFile(), `Missing inventory icon ${src}`);
+}
 for (const page of pages) {
   const html = readFileSync(path.join(site, page), "utf8");
   for (const [, url] of html.matchAll(/\b(?:href|src)="([^"]+)"/g)) {
@@ -28,7 +35,7 @@ for (const key of projects) {
     assert(statSync(path.join(site, "images", `${key}-${image}.webp`)).size > 0);
   }
 }
-const scripts = readdirSync(site).filter(file => file.endsWith(".js")).concat("source/reader.js");
+const scripts = readdirSync(site).filter(file => file.endsWith(".js")).concat("source/reader.js", inventoryDemo + "/sw.js");
 for (const script of scripts) {
   execFileSync(process.execPath, ["--check", path.join(site, script)], { stdio: "inherit" });
 }

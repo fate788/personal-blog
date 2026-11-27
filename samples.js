@@ -371,7 +371,13 @@
     root.append(tag("p", "pbs-intro", "先看一眼活动的样例漏斗，再打开校园活动、完成报名，回来对照刚刚增加的三条事件。"), link);
   }
 
-  const samples = { campus, ledger, incident, clinic, manual, review, access, funnel };
+  function inventory(root) {
+    const link = tag("a", "button", "体验一次离线盘点 ↗");
+    link.href = "demos/inventory/index.html";
+    root.append(tag("p", "pbs-intro", "以第一位仓员身份给 A01 的牛皮纸封箱胶带录入 23 卷。恢复联网后同步，切换第二位仓员录入 24 卷，再到主管工作台复核。"), link);
+  }
+
+  const samples = { campus, ledger, incident, clinic, manual, review, access, funnel, inventory };
   window.mountProjectSample = function (element, projectId) {
     if (!element) return;
     const root = tag("div", "pbs-sample");

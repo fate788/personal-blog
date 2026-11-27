@@ -6,6 +6,7 @@ window.blogGitHub = {
     review: "https://github.com/fate788/requirements-review-workbench",
     access: "https://github.com/fate788/temporary-access",
     funnel: "https://github.com/fate788/product-funnel",
+    inventory: "https://github.com/fate788/mobile-inventory",
     manual: "https://github.com/fate788/manual-search",
     campus: "https://github.com/fate788/campus-events",
     ledger: "https://github.com/fate788/ledger-reconciliation",
