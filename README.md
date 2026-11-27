@@ -6,6 +6,7 @@
 
 | 作品 | 可以体验的内容 | 独立源码仓库 |
 | --- | --- | --- |
+| 企业临时权限工作台 | [体验报表申请与到期回收](https://fate788.github.io/personal-blog/demos/access/)，核对审批前、授权中和到期后的访问结果 | [temporary-access](https://github.com/fate788/temporary-access) |
 | 需求审查工作台 | 从需求原句跟踪问题复核、验收条件与交付依据 | [requirements-review-workbench](https://github.com/fate788/requirements-review-workbench) |
 | 手册检索室 | [打开支持工作台](https://fate788.github.io/personal-blog/demos/manual/)，一键试查带出处的答复，也可导入自己的手册，发布修订并用条款结案 | [manual-search](https://github.com/fate788/manual-search) |
 | 校园场务 | 从学生报名到现场签到，查看签到时段对结果的影响 | [campus-events](https://github.com/fate788/campus-events) |

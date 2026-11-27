@@ -5,10 +5,11 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const site = fileURLToPath(new URL("../", import.meta.url));
-const projects = ["campus", "ledger", "incident", "clinic", "manual", "review"];
+const projects = ["campus", "ledger", "incident", "clinic", "manual", "review", "access"];
 const pages = ["index.html", ...projects.map(key => `source/${key}/index.html`)];
 assert(statSync(path.join(site, "demos/review/index.html")).isFile(), "Missing requirements review demo");
 assert(statSync(path.join(site, "demos/manual/index.html")).isFile(), "Missing support workspace demo");
+assert(statSync(path.join(site, "demos/access/index.html")).isFile(), "Missing temporary access demo");
 for (const page of pages) {
   const html = readFileSync(path.join(site, page), "utf8");
   for (const [, url] of html.matchAll(/\b(?:href|src)="([^"]+)"/g)) {

@@ -2,6 +2,15 @@
   "use strict";
 
   const cases = {
+    access: {
+      category:"企业平台与权限治理",audience:"临时协作人员、资源负责人和审计人员",
+      summary:"为具体人员开通某份内部报表的限时访问。申请、审批、回收和访问结果都能查到。",
+      images:["申请人工作台","访问与回收记录"],
+      process:[["提交访问申请","运营同事选择区域经营周报，说明用途和需要多久。"],["审批后核对报表","资源负责人批准后，申请人可在授权时间内打开报表。"],["到期后再次访问","推进演示时间，再打开同一份报表，查看拒绝与回收记录。"]],
+      testTitle:"同一报表，三个时点的结果",
+      result:"403 → 200 → 403",unit:"",resultLabel:"真实服务的 HTTP 响应",
+      resultText:"审批前、授权中和到期后，使用同一账号测试同一条报表接口。到期读取返回拒绝，审计可定位相应授权与时间。"
+    },
     review: {
       category:"需求质量与研发协作",audience:"需求作者、测试人员与项目负责人",
       summary:"审查同一文档的不同版本，从候选问题定位到原文，保留人工复核和修订结果。演示采用虚构服务台项目。",
@@ -121,6 +130,7 @@
       ["downloads/" + p.run, "下载完整运行包", "本地启动", true]
     ];
     if (id === "manual") links.push([p.mainURL, "下载离线工作台 HTML", "浏览器直接打开", "手册检索室.html"]);
+    if (id === "access") links.push([p.mainURL, "下载离线演练 HTML", "浏览器直接打开", "企业临时权限工作台.html"]);
     return `<section class="pd-resources" aria-labelledby="pd-resource-title">
       <h2 id="pd-resource-title">文章与项目文件</h2>
       <ul>${links.map(([url, label, hint, download]) => `<li><a href="${url}"${typeof download === "string" ? ` download="${download}"` : download ? " download" : ""}>
@@ -139,6 +149,7 @@
   function productAction(id, p) {
     if (id === "manual") return `<a class="pd-product" href="${p.mainURL}">打开支持工作台<span aria-hidden="true">↗</span></a>`;
     if (id === "review") return `<a class="pd-product" href="${p.mainURL}">打开演示工作台<span aria-hidden="true">↗</span></a>`;
+    if (id === "access") return `<a class="pd-product" href="${p.mainURL}">试用临时权限<span aria-hidden="true">↗</span></a>`;
     if (!localPreview) return "";
     const url = id === "campus" ? p.extras.find(([label]) => label === "同实例学生端")[1] : p.mainURL;
     const label = id === "campus" ? "打开学生端" : id === "manual" ? "打开检索室" : "打开工作台";
@@ -157,7 +168,7 @@
           <dl class="pd-facts"><div><dt>使用者</dt><dd>${record.audience}</dd></div><div><dt>技术栈</dt><dd>${p.stack}</dd></div>
             <div><dt>GitHub</dt><dd><a class="repo-link" href="${window.blogGitHub.repositories[id]}">${window.blogGitHub.repositories[id].split("/").slice(-2).join(" / ")}</a></dd></div>
           </dl>
-          <div class="pd-actions">${productAction(id, p)}<a class="pd-cta" href="${sampleLink(id)}">体验交互样例<span aria-hidden="true">↓</span></a><a class="pd-read" href="${source(id)}">在线读源码<span aria-hidden="true">↗</span></a></div>
+          <div class="pd-actions">${productAction(id, p)}${id==="access"?"":`<a class="pd-cta" href="${sampleLink(id)}">体验交互样例<span aria-hidden="true">↓</span></a>`}<a class="pd-read" href="${source(id)}">在线读源码<span aria-hidden="true">↗</span></a></div>
         </header>
         ${galleryMarkup(id, record)}
       </div>

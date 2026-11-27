@@ -359,7 +359,13 @@
     });
   }
 
-  const samples = { campus, ledger, incident, clinic, manual, review };
+  function access(root) {
+    const link = tag("a", "button", "打开报表授权演练 ↗");
+    link.href = "demos/access/index.html";
+    root.append(tag("p", "pbs-intro", "以运营同事身份申请区域经营周报，再切换到负责人审批。回到申请人视图读一次报表，推进演示时钟后，再用同一个入口检查访问结果。"), link);
+  }
+
+  const samples = { campus, ledger, incident, clinic, manual, review, access };
   window.mountProjectSample = function (element, projectId) {
     if (!element) return;
     const root = tag("div", "pbs-sample");

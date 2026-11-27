@@ -72,6 +72,7 @@
 .pd-evidence h2 { font-size: clamp(19px, 1.6vw, 24px); margin-top: 5px; }
 .pd-measure { display: flex; align-items: baseline; gap: 8px; margin-top: 14px; }
 .pd-measure strong { font: 520 clamp(42px, 4.5vw, 66px)/1.15 "Segoe UI", var(--sans); letter-spacing: -.055em; font-variant-numeric: tabular-nums; }
+.pd-access .pd-measure strong { font-size: clamp(24px, 3vw, 39px); letter-spacing: -.045em; }
 .pd-measure span, .pd-measure-label { font-size: 13px; color: #524a3a; }
 .pd-evidence-text { border-top: 1px solid #d1d4cd; margin-top: 15px; padding-top: 12px; color: #475157; font-size: 14px; line-height: 1.8; }
 .pd-bottom { margin-top: clamp(28px, 3.8vw, 54px); border-top: 1px solid var(--pd-line); padding-top: clamp(22px, 2.1vw, 32px); }
