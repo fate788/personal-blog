@@ -174,7 +174,58 @@
     select(0);
   }
 
-  const samples = { campus, ledger, incident };
+  function clinic(root) {
+    title(root, "把释放的一席分给谁？", "离线模拟 · R001 已约，R003 和 R004 依次候补。取消原预约后，可以选择按时确认，或模拟十分钟的确认期限到期。");
+    const result = resultBox();
+    const controls = tag("div", "pbs-options pbs-clinic-actions");
+    controls.setAttribute("role", "group");
+    controls.setAttribute("aria-label", "模拟候补操作");
+    const release = button("取消 R001 的预约", "pbs-option");
+    const confirm = button("确认当前留位", "pbs-option");
+    const advance = button("推进 10 分钟", "pbs-option");
+    const restart = button("重新模拟", "pbs-option");
+    controls.append(release, confirm, advance, restart);
+    root.append(result, controls);
+    let booked, held, queue, elapsed;
+    const clock = () => {
+      const minute = 8 * 60 + 40 + elapsed;
+      return String(Math.floor(minute / 60)).padStart(2, "0") + ":" + String(minute % 60).padStart(2, "0");
+    };
+    function update(message) {
+      const status = booked ? booked + " 已约" : held ? "为 " + held + " 留位" : "余位 1 席";
+      result.replaceChildren(tag("strong", "", clock() + " · " + status),
+        tag("p", "", message), tag("p", "", "候补队列　" + (queue.join(" → ") || "无人候补")));
+      release.hidden = booked !== "R001";
+      confirm.hidden = advance.hidden = !held;
+      restart.hidden = booked === "R001";
+    }
+    function reset() {
+      booked = "R001"; held = ""; queue = ["R003", "R004"]; elapsed = 0;
+      update("当前这一席由 R001 占用。");
+    }
+    release.addEventListener("click", () => {
+      booked = "";
+      held = queue.shift();
+      update(held + " 获得十分钟确认时间，这一席已计入占用。");
+      confirm.focus({preventScroll:true});
+    });
+    confirm.addEventListener("click", () => {
+      booked = held; held = "";
+      update("确认成功，原留位转为正式预约。");
+      restart.focus({preventScroll:true});
+    });
+    advance.addEventListener("click", () => {
+      elapsed += 10;
+      const expired = held;
+      held = queue.shift() || "";
+      update(expired + " 的留位到期。" + (held ? "轮到 " + held + " 确认。" : "候补队列已清空，号源可重新安排。"));
+      if (!held) restart.focus({preventScroll:true});
+    });
+    restart.addEventListener("click", () => { reset(); release.focus({preventScroll:true}); });
+    reset();
+  }
+
+  const samples = { campus, ledger, incident, clinic };
   window.mountProjectSample = function (element, projectId) {
     if (!element) return;
     const root = tag("div", "pbs-sample");

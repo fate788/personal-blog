@@ -7,6 +7,7 @@
 | 校园场务 | 从学生报名到现场签到，查看签到时段对结果的影响 | [campus-events](https://github.com/fate788/campus-events) |
 | 双账核对工作台 | 核对两份样例账单，查看原始行并填写复核意见 | [ledger-reconciliation](https://github.com/fate788/ledger-reconciliation) |
 | 故障响应工作台 | 跟随一次任务积压演练，回看告警和恢复记录 | [incident-response](https://github.com/fate788/incident-response) |
+| 门诊候补与改约工作台 | 释放虚构号源，观察到期递补，再为停诊场次的预约安排新时段 | [clinic-scheduling](https://github.com/fate788/clinic-scheduling) |
 
 ## 打开博客
 

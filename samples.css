@@ -30,3 +30,5 @@
 .pbs-sample .pbs-history:not(:empty){margin-top:12px;border-top:1px solid var(--pbs-line);padding-top:9px}
 .pbs-sample .pbs-history ol{margin:4px 0 0;padding-inline-start:1.5em;overflow-wrap:anywhere}
 @media(max-width:500px){.pbs-sample .pbs-option{padding-inline:9px}.pbs-sample .pbs-clock li span{font-size:11px}.pbs-sample .pbs-result{padding:9px 11px}}
+.pbs-sample .pbs-options.pbs-clinic-actions {margin:12px 0 0}
+.pbs-clinic-actions [hidden] {display:none}

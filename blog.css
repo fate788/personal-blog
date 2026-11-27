@@ -87,7 +87,7 @@ main:focus {outline:none}
 }
 .controls select:hover {border-color:#868f93}
 .textbtn,.textlink {background:none;border:0;padding:2px 0;color:#5d502f;text-decoration:underline;text-underline-offset:4px;font:500 13px var(--sans)}
-.cards {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,1.8vw,26px)}
+.cards {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,1.8vw,26px)}
 .card {
   position:relative;isolation:isolate;display:flex;flex-direction:column;min-width:0;
   background:#fff;border:1px solid #c8cece;border-radius:9px;overflow:hidden;

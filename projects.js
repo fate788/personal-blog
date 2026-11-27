@@ -2,7 +2,7 @@
 const roleNames = {backend:"业务后端",web:"Web 前端",mobile:"移动客户端",sre:"运维开发 / SRE",qa:"测试开发",data:"数据工程",ai:"AI 应用",algo:"搜索与推荐算法",security:"应用安全与隐私"};
 const industryNames = {campus:"校园教育",trade:"电商支付",platform:"跨行业运维平台",health:"智慧医疗",logistics:"物流与本地生活",content:"内容推荐",iot:"物联网"};
 const groups = [
-  {id:"product",name:"产品研发",roles:["backend","web","mobile"],description:"从报名事务到逐笔复核，看一条业务规则怎样落实到接口和用户操作。"},
+  {id:"product",name:"产品研发",roles:["backend","web","mobile"],description:"从报名、对账和门诊候补，看业务规则怎样落实到接口和用户操作。"},
   {id:"platform",name:"平台可靠性",roles:["sre","qa"],description:"从故障响应和接口回归，看异常如何被发现、验证与追溯。"},
   {id:"data",name:"数据工程",roles:["data"],description:"从两份账单的原始行出发，核对每个金额的口径、差异与来源。"},
   {id:"ai",name:"AI 与算法",roles:["ai","algo"],description:"关注检索结果的依据、排序效果与可重复的评测。",planned:[
@@ -13,6 +13,21 @@ const groups = [
     ["日志隐私抽检工具","在合成日志中标注敏感字段，统计漏脱和误脱，检查保留的信息能否支持排障。"]]}
 ];
 const projects = {
+  clinic:{
+    name:"门诊候补与改约工作台", version:"v0.1", sector:["health"], roles:["backend","qa"],
+    stack:"Python / SQLite / JavaScript", run:"clinic-run.zip",
+    pitch:"号源释放后按顺序为候补者留位，停诊时按同科余量重新安排受影响的预约。",
+    evidence:"12 个虚构编号同时登记最后一席，最终 1 人已约、11 人候补。",
+    mainURL:"http://127.0.0.1:8796/", extras:[],
+    features:[["候补递补与确认","号源释放后为队首保留十分钟，到期递补下一位。"],["停诊与改约","查看待改约名单，按可用号源处理一条或一批预约。"]],
+    proof:{backend:"取消、限时保留与确认写入 SQLite 事务。在同一批改约中，即便后面一条预约发生冲突，前面已经更新的记录也会回滚。",qa:"15 项自动化测试覆盖边界时刻、并发占号、整批回滚等场景。12 个虚构编号同时登记一席，最终 1 人已约、11 人候补。"},
+    note:"候补到期的那一刻，号源该给谁？",teaser:"沿着一席号源的去向，看排队、确认期限和停诊改约怎样共享容量约束。",
+    parts:[
+      ["一席号源的三个去向","在这套合成排班里，R001 已约，R003、R004 依次候补。取消 R001 时，系统立刻为 R003 留位。从此刻到确认期限，这一个位置已经占用，窗口不能再把它分给另一条预约。"],
+      ["恰好到期时先处理谁","演示时钟从 08:40 开始。取消后推进十分钟，08:50 正好到达 R003 的确认期限。系统先让这条留位失效，再把席位交给下一位 R004。R004 在自己的期限内确认，才会转为已约。离线样例可以分别试一次按时确认和到期递补。"],
+      ["停诊后的名额怎样核对","停诊让已经确认的预约进入待改约名单。窗口选择同科仍开放的班次，先核对这一批的总人数和目标余量。容量不够时，原名单保持完整。这样窗口可以缩小批次或改选班次，再次提交时也清楚哪些人仍待安排。"]
+    ]
+  },
   campus:{
     name:"校园场务", version:"v0.12", sector:["campus"], roles:["backend","web","qa"],
     stack:"Java 17 / Spring Boot / JDBC", run:"campus-run.zip",

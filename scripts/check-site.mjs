@@ -5,7 +5,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const site = fileURLToPath(new URL("../", import.meta.url));
-const projects = ["campus", "ledger", "incident"];
+const projects = ["campus", "ledger", "incident", "clinic"];
 const pages = ["index.html", ...projects.map(key => `source/${key}/index.html`)];
 for (const page of pages) {
   const html = readFileSync(path.join(site, page), "utf8");
