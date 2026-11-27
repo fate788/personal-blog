@@ -5,7 +5,7 @@
     clinic: {
       category: "门诊预约调度",
       audience: "门诊排班与预约窗口人员",
-      summary: "窗口人员选定出诊日期后，就能看到各班次还剩多少号。可以替就诊人约另一天的门诊，也可以凭预约单查明何时进了候补、号源保留到几点。演示使用合成排班。",
+      summary: "查门诊余号、替就诊人跨日预约，也能凭单号核对候补顺序和留位期限。演示使用合成排班。",
       images: ["预约日程", "预约查询"],
       process: [
         ["查号并登记", "看当日号源和班次，也可以在快速登记中另选日期。输入虚构就诊编号，有号直接预约，约满则进入候补。"],
@@ -72,7 +72,7 @@
         <img src="${images(id)}" alt="${captions[id][0]}">
         <span class="pd-enlarge" aria-hidden="true">${id === "ledger" ? "查看全图 " : ""}⤢</span>
       </button>
-      <figcaption class="pd-caption" aria-live="polite">${captions[id][0]}</figcaption>
+      ${id === "clinic" ? "" : `<figcaption class="pd-caption" aria-live="polite">${captions[id][0]}</figcaption>`}
     </figure>`;
   }
 
@@ -91,7 +91,7 @@
         picture.src = url;
         enlarge.dataset.screen = url;
         enlarge.setAttribute("aria-label", "放大截图，" + record.images[index]);
-        caption.textContent = picture.alt;
+        if (caption) caption.textContent = picture.alt;
         count.textContent = (index + 1) + " / 2";
       });
     }

@@ -13,7 +13,7 @@ const codePaths={campus:["src/main/java/cn/campus/events/CampusEvents.java",183]
 const deepCode=id=>source(id)+"#"+new URLSearchParams({file:codePaths[id][0],line:codePaths[id][1]});
 const runtime={campus:"Java 17 或以上，解压后运行 start-review.cmd，默认端口 8768。",ledger:"Python 3.10 或以上，解压后运行 start-review.cmd，默认端口 8792。",incident:"Python 3.10 或以上，解压后运行 start-incident.cmd，默认端口 8793。隔离演练可独立使用。",clinic:"解压后在项目目录运行 python server.py，默认端口 8796。排班和预约使用合成演示数据。"};
 const captions={
-  clinic:["12 月 8 日的三个班次共六个号源，四个可约。选中 S01 后可以核对已约名单和候补顺序。","用预约单 R003 查回 P003 的办理流水。P003 先登记候补，随后因前一位退号获得十分钟留位。"],
+  clinic:["预约日程，12 月 8 日有四个号源可约。","预约查询，R003 获得十分钟留位。"],
   campus:["学生端活动大厅和可报名的样例分享会。","发布端的限时六位码、二维码与现场报名名单。"],
   ledger:["两份样例分别有 8 行和 6 行，3 项一致，5 项待复核。","000127 两侧第 4 行的 128 元和 118 元，以及已保存的演示复核结论。"],
   incident:["独立演练服务返回 HTTP 200，最早任务已等 95 秒，同时双账探针正常。","一次隔离演练的首次异常、签收、解除和连续健康确认。"]
@@ -92,7 +92,7 @@ function projectCatalog(query,scroll){
   if(scroll)document.getElementById("catalog").scrollIntoView();
 }
 function note(id,p){
-  const screenshot='<figure class="article-figure"><button class="screenbtn" data-screen="'+images(id,true)+'" aria-label="放大实屏图"><img src="'+images(id,true)+'" alt="'+captions[id][1]+'" loading="lazy"></button><figcaption>'+captions[id][1]+'</figcaption></figure>';
+  const screenshot='<figure class="article-figure"><button class="screenbtn" data-screen="'+images(id,true)+'" aria-label="放大实屏图"><img src="'+images(id,true)+'" alt="'+captions[id][1]+'" loading="lazy"></button>'+(id==="clinic"?"":'<figcaption>'+captions[id][1]+'</figcaption>')+'</figure>';
   const record=id==="incident"?'<div class="article-probe">'+document.getElementById("incident-record").innerHTML+'</div>':"";
   host.innerHTML=crumbs(p.name,"我的文章","#notes")+'<article class="article"><header><div class="eyebrow">'+p.name+'　/　'+p.version+'</div><h1>'+p.note+'</h1><p class="intro">'+p.teaser+'</p><div class="article-byline">李子衡 <span>·</span> '+p.stack+'</div></header>'+
     p.parts.map(([title,body],i)=>'<section><h2>'+title+'</h2><p>'+body+'</p></section>'+(i===0?record:'')+(i===1?screenshot:'')).join("")+

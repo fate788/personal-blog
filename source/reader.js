@@ -84,7 +84,12 @@ function loadFile(file) {
     numberLink.title="定位到第 "+number+" 行";
     numberLink.setAttribute("aria-label","第 "+number+" 行");
     numberLink.tabIndex=-1;
-    const preview=file.path.endsWith(".css") ? text.replace(/data:font\/woff2;base64,[A-Za-z0-9+/=]+/g,"data:font/woff2;base64,〔字体数据已折叠，复制文件或下载可获取完整原文〕") : text;
+    let preview=text;
+    if(file.path.endsWith(".css")){
+      preview=text.replace(/data:font\/woff2;base64,[A-Za-z0-9+/=]+/g,"data:font/woff2;base64,〔字体数据已折叠，复制文件或下载可获取完整原文〕");
+    } else if(repositoryLink.dataset.project==="clinic" && file.path==="static/index.html"){
+      preview=text.replace(/data:image\/webp;base64,[A-Za-z0-9+/=]+/g,"data:image/webp;base64,〔场景图数据已折叠，复制文件或下载可获取完整原文〕");
+    }
     row.append(numberLink,make("code",preview));
     content.append(row);
   }
