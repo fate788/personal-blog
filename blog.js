@@ -13,7 +13,7 @@ const codePaths={manual:["engine.py",372],campus:["src/main/java/cn/campus/event
 const deepCode=id=>source(id)+"#"+new URLSearchParams({file:codePaths[id][0],line:codePaths[id][1]});
 const runtime={manual:"在线版可直接使用，手册和问题保存在当前浏览器。本地版需要 Python 3.10 或以上，解压后运行 start-manual.cmd 或 python server.py，默认端口 8799。手册版本和问题记录保存在 SQLite，可接本地模型。",campus:"Java 17 或以上，解压后运行 start-review.cmd，默认端口 8768。",ledger:"Python 3.10 或以上，解压后运行 start-review.cmd，默认端口 8792。",incident:"Python 3.10 或以上，解压后运行 start-incident.cmd，默认端口 8793。隔离演练可独立使用。",clinic:"解压后在项目目录运行 python server.py，默认端口 8796。排班和预约使用合成演示数据。"};
 const captions={
-  funnel:["校园活动报名漏斗，查看活动、开始报名和报名成功可按设备和转化窗口对比。","在事件明细核对报名步骤、设备、时间及原始匿名访客标识。"],
+  funnel:["报名转化总览，按活动、设备和转化窗口对比三步漏斗。","从报名漏斗打开流失访客名单，可查看具体访客的原始事件。"],
   access:["申请人首页，可选择内部报表并发起限时访问申请。","审计记录可核对申请、批准、报表读取、到期和拒绝访问。"],
   review:["虚构企业 IT 服务台的项目概览、需求版本和待复核问题。","在审查清单中打开 SLA 计时冲突，同时核对两个条款的原文。"],
   manual:["从工作台直接查看演示答案，也可导入自己的手册后开始查询。","设备续借问题完成复核，结案记录保留修订版手册的引用段落。"],
@@ -25,7 +25,7 @@ const captions={
 const images=(id,detail=false)=>"images/"+id+"-"+(detail?"detail":"main")+".webp?v="+projects[id].version;
 codePaths.review = ["backend/src/main/java/studio/reqaudit/ReviewService.java",432];
 codePaths.access = ["domain.mjs",250];
-codePaths.funnel = ["analytics.mjs",69];
+codePaths.funnel = ["analytics.mjs",82];
 runtime.review = "浏览器演示可直接打开，使用虚构的 IT 服务台项目。完整运行包的构建和启动步骤见 README。";
 runtime.access = "在线版使用虚构报表和浏览器演练数据。Node.js 22.13 或以上版本可启动 SQLite 服务，也可配置团队账号与自己的资源。";
 runtime.funnel = "公开版在浏览器中使用合成样本，可亲自报名。完整运行包需要 Node.js 22.13 或以上版本，按 README 启动分析服务和校园场务联动。";
