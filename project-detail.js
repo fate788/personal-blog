@@ -2,6 +2,14 @@
   "use strict";
 
   const cases = {
+    roster: {
+      category:"运筹优化与客服运营",audience:"客服班组长及运营排班人员",
+      summary:"根据技能、请假和周班次上限求解一周班表。遇到临时缺岗时复核可用人员，保留已确认的分配再重算。",
+      images:["常规周班表","周日晚班缺口"],
+      process:[["核对一周需求","打开常规样例，选择一班查看技能、人数和安排，将已确认的人选锁定。"],["复核请假缺口","切到请假样例，展开周日晚班，查看候选员工的技能和可用状态。"],["调整并重算","恢复专席员工周日可用，核对覆盖与锁定，再导出班表。"]],
+      testTitle:"专席临时请假后，哪个班次排不满？",result:"21 → 20",unit:"席",resultLabel:"同一周的有效覆盖",
+      resultText:"周日晚间原有一名可用的售后升级专席。该员工请假后缺 1 席，原有锁定仍保留。恢复可用后覆盖回到 21 席。"
+    },
     logprivacy: {
       category:"应用安全与隐私",audience:"维护日志规则的开发、运维和测试人员",
       summary:"用同一批日志对照两套脱敏规则，检查敏感值的漏遮和诊断字段的误遮，再导出审查结果。",
@@ -201,6 +209,7 @@
   function productAction(id, p) {
     if (id === "coldchain") return `<a class="pd-product" href="${p.mainURL}">打开运输追溯<span aria-hidden="true">↗</span></a><a class="pd-cta" href="${p.mainURL}&amp;trip=cc-1026">查看断报车次<span aria-hidden="true">↗</span></a>`;
     if (id === "logprivacy") return `<a class="pd-product" href="${p.mainURL}">打开抽检台<span aria-hidden="true">↗</span></a><a class="pd-cta" href="${p.mainURL}&amp;view=baseline">查看基线发现<span aria-hidden="true">↗</span></a>`;
+    if (id === "roster") return `<a class="pd-product" href="${p.mainURL}">打开排班台<span aria-hidden="true">↗</span></a><a class="pd-cta" href="${p.mainURL}&amp;case=absence">查看请假缺口<span aria-hidden="true">↗</span></a>`;
     if (id === "apiregression") return `<a class="pd-product" href="${p.mainURL}">打开验收台<span aria-hidden="true">↗</span></a><a class="pd-cta" href="${p.mainURL}&amp;candidate=candidate-b">运行修订版<span aria-hidden="true">↗</span></a>`;
     if (id === "manual") return `<a class="pd-product" href="${p.mainURL}">打开支持工作台<span aria-hidden="true">↗</span></a>`;
     if (id === "review") return `<a class="pd-product" href="${p.mainURL}">打开演示工作台<span aria-hidden="true">↗</span></a>`;
@@ -228,7 +237,7 @@
             ${id==="funnel"?'<div><dt>接入项目</dt><dd><a href="#project/campus">校园场务</a></dd></div>':""}
             ${id==="campus"?'<div><dt>报名分析</dt><dd><a href="#project/funnel">产品转化分析台</a></dd></div>':""}
           </dl>
-          <div class="pd-actions">${productAction(id, p)}${["access","funnel","inventory","searchlab","apiregression","coldchain","logprivacy"].includes(id)?"":`<a class="pd-cta" href="${sampleLink(id)}">体验交互样例<span aria-hidden="true">↓</span></a>`}<a class="pd-read" href="${source(id)}">在线读源码<span aria-hidden="true">↗</span></a></div>
+          <div class="pd-actions">${productAction(id, p)}${["access","funnel","inventory","searchlab","apiregression","coldchain","logprivacy","roster"].includes(id)?"":`<a class="pd-cta" href="${sampleLink(id)}">体验交互样例<span aria-hidden="true">↓</span></a>`}<a class="pd-read" href="${source(id)}">在线读源码<span aria-hidden="true">↗</span></a></div>
         </header>
         ${galleryMarkup(id, record)}
       </div>
@@ -238,7 +247,7 @@
       <div class="pd-explore">
         <section class="pd-sample" id="sample" aria-labelledby="pd-sample-heading"><h2 id="pd-sample-heading">交互样例</h2><div id="sample-slot"></div>${serviceLinks(p)}</section>
         <aside class="pd-evidence" aria-labelledby="pd-evidence-title">
-          <p class="pd-label">${["funnel","inventory","searchlab","apiregression","coldchain","logprivacy"].includes(id)?"合成样例":"本机验证记录"}</p><h2 id="pd-evidence-title">${record.testTitle}</h2>
+          <p class="pd-label">${["funnel","inventory","searchlab","apiregression","coldchain","logprivacy","roster"].includes(id)?"合成样例":"本机验证记录"}</p><h2 id="pd-evidence-title">${record.testTitle}</h2>
           <div class="pd-measure"><strong>${record.result}</strong><span>${record.unit}</span></div>
           <p class="pd-measure-label">${record.resultLabel}</p><p class="pd-evidence-text">${record.resultText}</p>
         </aside>

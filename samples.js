@@ -424,7 +424,18 @@
     root.append(tag("p", "pbs-intro", "打开基线定位漏遮与误遮，再切到候选规则，核对诊断字段和导出状态。"), actions);
   }
 
-  const samples = { campus, ledger, incident, clinic, manual, review, access, funnel, inventory, searchlab, apiregression, coldchain, logprivacy };
+  function roster(root) {
+    const demo = projects.roster.mainURL;
+    const normal = tag("a", "button primary", "查看一周班表 ↗");
+    normal.href = demo;
+    const absence = tag("a", "button", "复核请假缺口 ↗");
+    absence.href = demo + "&case=absence";
+    const actions = tag("div", "linkrow");
+    actions.append(normal, absence);
+    root.append(tag("p", "pbs-intro", "先看排满的常规周，再复核周日晚班缺口。恢复专席可用日期后可重算。"), actions);
+  }
+
+  const samples = { campus, ledger, incident, clinic, manual, review, access, funnel, inventory, searchlab, apiregression, coldchain, logprivacy, roster };
   window.mountProjectSample = function (element, projectId) {
     if (!element) return;
     const root = tag("div", "pbs-sample");

@@ -1,11 +1,12 @@
 "use strict";
 const roleNames = {backend:"业务后端",web:"Web 前端",mobile:"移动客户端",sre:"运维开发 / SRE",qa:"测试开发",data:"数据工程",ai:"AI 应用",algo:"搜索与推荐算法",security:"应用安全与隐私",iot:"物联网应用开发"};
+roleNames.optimization = "运筹优化";
 const industryNames = {campus:"校园教育",trade:"电商支付",platform:"跨行业运维平台",health:"智慧医疗",logistics:"物流与本地生活",content:"内容推荐",iot:"物联网"};
 const groups = [
   {id:"product",name:"产品研发",roles:["backend","web","mobile"],description:"从移动盘点、活动报名和门诊候补，看业务规则怎样落实到现场操作和接口。"},
   {id:"platform",name:"平台可靠性",roles:["sre","qa"],description:"从故障响应和接口回归，看异常如何被发现、验证与追溯。"},
   {id:"data",name:"数据工程与物联网",roles:["data","iot"],description:"从账单、行为事件和设备遥测出发，核对指标、异常和原始数据。"},
-  {id:"ai",name:"AI 与算法",roles:["ai","algo"],description:"商品搜索比较召回和排序。手册检索查看答复出处与证据。",planned:[
+  {id:"ai",name:"AI 与算法",roles:["ai","algo","optimization"],description:"从检索排序、证据评测和客服排班看规则如何落到可验证的算法结果。",planned:[
     ["带出处的制度问答","用固定版本的公开手册作答，核对每个引用，记录无依据问题的拒答情况。"]]},
   {id:"security",name:"应用安全与隐私",roles:["security"],description:"从临时授权、访问审计和日志脱敏，看权限和数据如何得到保护。"}
 ];
@@ -14,6 +15,20 @@ industryNames.collaboration = "研发协作";
 industryNames.enterprise = "企业内部平台";
 industryNames.commerce = "电商零售";
 const projects = {
+  roster:{
+    name:"客服排班工作台",version:"v1.0",sector:["support","enterprise"],roles:["optimization","web","backend"],stack:"JavaScript / Node.js / 最小费用流 / CSV",
+    run:"roster-run.zip",mainURL:"demos/roster/index.html?v=1.0",extras:[],
+    pitch:"按技能、可用日与周上限编排客服班表。锁定已确认班次，人员请假时重算剩余席位并定位缺口。",
+    evidence:"8 位合成员工。常规周排满 21 个席位，周日唯一可用的售后专席请假后为 20 / 21，缺口出现在周日晚间。",
+    features:[["一周班表","选中班次核对技能、人数和当前安排，查看每名员工的周工作量。"],["缺口复核","切换请假情景或调整个人可用日，重算时保留已锁定的安排。"],["导入与交付","用 JSON 导入本地排班条件，导出当前工作区和 CSV。命令行可复跑同样的约束。"]],
+    proof:{optimization:"用最小费用流先最大化填补席位，再最小化班次数平方和。测试以小规模穷举交叉核对。",web:"用周历和班次面板解释缺口，响应式呈现每日席位与人员。",backend:"同一套规则校验 JSON、预分配锁定席位并输出可复跑的分配结果。"},
+    note:"周日晚班为什么少了一席？",teaser:"把同一周的正常班表和专席请假结果放在一起复核。",
+    parts:[
+      ["把客服技能和人数落到席位","样例每天需要两名日间在线客服和一名晚间售后升级客服，共 21 席。"],
+      ["保留请假造成的缺口","周日晚班其余合格员工原已休息，唯一可用的专席临时请假，计入现有约束后只覆盖 20 席。"],
+      ["让班组长改完就能复算","锁定已确认的安排，再修改员工的可用日。班次数平方和只用于平衡同等覆盖时的方案。"]
+    ]
+  },
   logprivacy:{
     name:"日志隐私抽检台",version:"v1.0",sector:["platform","enterprise"],roles:["security","sre","qa"],stack:"JavaScript / Node.js / JSONL / GitHub Actions",
     run:"logprivacy-run.zip",mainURL:"demos/logprivacy/index.html?v=1.0",extras:[],

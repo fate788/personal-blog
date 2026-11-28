@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <base href="../../index.html">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#171c20">
+  <meta name="author" content="李子衡">
+  <meta name="description" content="李子衡的客服排班工作台。根据技能、请假、锁定安排和周上限求解一周班表，复核并修正缺口。">
+  <title>客服排班工作台 · 李子衡的个人博客</title>
+  <link rel="canonical" href="https://fate788.github.io/personal-blog/projects/roster/index.html">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="blog.css?rev=10">
+  <link rel="stylesheet" href="samples.css?rev=15">
+  <link rel="stylesheet" href="project-detail.css?rev=23">
+  <script defer src="github-links.js?rev=26"></script>
+  <script defer src="projects.js?rev=30"></script>
+  <script defer src="samples.js?rev=29"></script>
+  <script defer src="project-detail.js?rev=29"></script>
+  <script defer src="blog.js?rev=31"></script>
+</head>
+<body>
+  <a href="projects/roster/index.html#content" class="skip">跳到正文</a>
+  <header class="mast"><div class="shell mast-inner">
+    <a href="#home" class="identity" aria-label="李子衡的个人博客，首页"><span class="signature" aria-hidden="true"><i></i><i></i><i></i></span><strong>李子衡</strong><span class="brand-extra">个人博客</span></a>
+    <nav aria-label="博客导航"><a href="#home" data-page="home">首页</a><a href="#projects" data-page="projects" aria-current="page">作品</a><a href="#notes" data-page="notes">文章</a><a href="#contact" data-page="contact">联系</a></nav>
+    <address class="mast-contact" aria-label="联系李子衡">
+      <a href="mailto:1316241517@qq.com"><span>邮箱</span>1316241517@qq.com</a>
+      <a href="tel:19137523310"><span>电话</span>19137523310</a>
+      <a rel="me" href="https://github.com/fate788"><span>GitHub</span><b>@fate788</b></a>
+    </address>
+  </div></header>
+  <div class="category-band" hidden><nav class="category-strip shell" aria-label="项目分类" id="categories"></nav></div>
+  <main id="content" class="shell" tabindex="-1" data-project="roster">
+    <article class="pd-case pd-roster">
+      <nav class="pd-crumb" aria-label="面包屑"><a href="#home">首页</a><span aria-hidden="true">/</span><a href="#projects">作品</a><span aria-hidden="true">/</span><span aria-current="page">客服排班工作台</span></nav>
+      <div class="pd-lead">
+        <header class="pd-intro">
+          <p class="pd-topic"><span>运筹优化与客服运营</span><span>v1.0</span></p>
+          <h1>客服排班工作台</h1>
+          <p class="pd-summary">根据技能、请假和周班次上限生成班表。遇到缺岗时复核可用人员，保留已确认的安排再重算。</p>
+          <dl class="pd-facts"><div><dt>技术栈</dt><dd>JavaScript / Node.js / 最小费用流 / CSV</dd></div>
+            <div><dt>GitHub</dt><dd><a class="repo-link" href="https://github.com/fate788/support-roster">fate788 / support-roster</a></dd></div></dl>
+          <div class="pd-actions"><a class="pd-product" href="demos/roster/index.html?v=1.0">打开排班台<span aria-hidden="true">↗</span></a><a class="pd-cta" href="demos/roster/index.html?v=1.0&amp;case=absence">查看请假缺口<span aria-hidden="true">↗</span></a><a class="pd-read" href="source/roster/index.html">在线读源码<span aria-hidden="true">↗</span></a></div>
+        </header>
+        <figure class="pd-gallery" aria-label="产品实屏">
+          <a class="screenbtn pd-screen" href="images/roster-main.webp?v=v1.0"><img src="images/roster-main.webp?v=v1.0" alt="常规周的客服班表和班次详情"></a>
+          <figcaption class="pd-caption">常规周覆盖 21 席。唯一可用的售后专席请假后，周日晚间缺一席。</figcaption>
+        </figure>
+      </div>
+    </article>
+  </main>
+  <footer class="foot"><div class="shell foot-inner"><div><a href="#home"><b>李子衡的个人博客</b></a><span>计算机专业学生</span></div></div></footer>
+  <dialog id="gallery" aria-label="产品截图">
+    <div class="dialog-bar"><span id="photo-caption"></span><div class="gallery-actions">
+      <button type="button" id="gallery-size" aria-controls="photo-viewport">原始尺寸</button>
+      <button type="button" id="close-gallery">关闭大图</button>
+    </div></div>
+    <div id="photo-viewport" tabindex="0" role="region" aria-label="截图，可滚动查看"><img id="photo" alt=""></div>
+  </dialog>
+</body>
+</html>
