@@ -5,11 +5,11 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const site = fileURLToPath(new URL("../", import.meta.url));
-const projects = ["campus", "ledger", "incident", "clinic", "manual", "review", "access", "funnel", "inventory", "searchlab"];
+const projects = ["campus", "ledger", "incident", "clinic", "manual", "review", "access", "funnel", "inventory", "searchlab", "apiregression"];
 const inventoryDemo = "demos/inventory";
 const pages = [
-  "index.html", "projects/inventory/index.html", "projects/searchlab/index.html",
-  ...projects.map(key => `source/${key}/index.html`), inventoryDemo + "/index.html", "demos/searchlab/index.html"
+  "index.html", "projects/inventory/index.html", "projects/searchlab/index.html", "projects/apiregression/index.html",
+  ...projects.map(key => `source/${key}/index.html`), inventoryDemo + "/index.html", "demos/searchlab/index.html", "demos/apiregression/index.html"
 ];
 assert(statSync(path.join(site, "demos/review/index.html")).isFile(), "Missing requirements review demo");
 assert(statSync(path.join(site, "demos/manual/index.html")).isFile(), "Missing support workspace demo");

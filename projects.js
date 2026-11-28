@@ -15,6 +15,21 @@ industryNames.collaboration = "研发协作";
 industryNames.enterprise = "企业内部平台";
 industryNames.commerce = "电商零售";
 const projects = {
+  apiregression:{
+    name:"接口回归验收台",version:"v1.0",sector:["commerce","platform"],roles:["qa","backend","sre"],stack:"JavaScript / Node.js / HTTP / GitHub Actions",
+    run:"apiregression-run.zip",mainURL:"demos/apiregression/index.html?v=1.0",extras:[["本机验收台","http://127.0.0.1:8824/"]],
+    pitch:"用同一批订单接口请求对照基线和候选版。即使两边都返回 200，也能定位缺失字段、类型和业务值的变化。",
+    evidence:"10 个合成用例中，第一候选版有 5 个被阻断。修订版 10 个全部通过，保留 5 项兼容变更。",
+    features:[["响应契约","核对 HTTP 状态、字段存在性、类型和固定业务值。"],["响应差异","定位 JSON 路径，查看基线与候选两份原始响应。"],["发布门禁","浏览器查看用例详情，命令行输出 JSON 和可供 CI 判断的退出码。"]],
+    proof:{qa:"用固定订单数据检查 10 个成功、错误与边界用例。同一套验收可复跑并导出逐条证据。",backend:"本机样例服务提供三个版本的实际 HTTP 响应，覆盖订单查询、创建、取消和错误处理。",sre:"命令行用退出码区分通过、阻断和执行失败，可作为流水线验收步骤。"},
+    note:"订单接口返回 200，为什么发布还是被阻断？",
+    teaser:"用订单金额和错误响应两个案例说明，怎样从状态码检查走到可执行的接口契约。",
+    parts:[
+      ["让两个版本跑同一批请求","用同一组订单、退款和物流样例对照基线与候选版。用例记录请求方法和路径，详情保留两份响应。"],
+      ["找出 200 里面的变化","两个版本的订单详情都返回 200，但候选版把 amountCents 从数字 29900 改成了字符串。依赖分单位数值的客户端需要先改解析逻辑。"],
+      ["放行有明确依据的变更","刷新时间和追踪编号按用例规则忽略。修订版继续检查必填字段和稳定业务值，并把兼容新增留在报告里。命令行可以据此决定流水线是否继续。"]
+    ]
+  },
   searchlab:{
     name:"商品搜索实验台",version:"v1.2",sector:["commerce"],roles:["algo","web"],stack:"JavaScript / Node.js / 相关性评测",
     run:"searchlab-run.zip",mainURL:"demos/searchlab/index.html?v=1.2",evaluationURL:"demos/searchlab/index.html?v=1.2#evaluation",extras:[["本机实验台","http://127.0.0.1:8818/"]],

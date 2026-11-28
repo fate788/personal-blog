@@ -2,6 +2,14 @@
   "use strict";
 
   const cases = {
+    apiregression: {
+      category:"接口测试与发布验收",audience:"测试开发、后端开发和发布负责人",
+      summary:"把同一批订单接口用例发给基线和候选版，找出会破坏既有客户端的响应变化。在原始 JSON 里核对，再决定这次发布能否通过。",
+      images:["发布验收工作台","订单响应差异"],
+      process:[["运行第一候选版","同一套用例核对订单、退款、物流和错误响应，快速筛出阻断项。"],["定位金额字段","打开订单详情用例，在两边同为 200 时检查 $.data.amountCents 的类型差异。"],["回归修订版本","改跑第二候选版，确认兼容变更可放行，再导出报告。命令行可复跑同一套验收。"]],
+      testTitle:"首轮候选版有多少个用例会阻断发布？",result:"5",unit:"个",resultLabel:"10 个合成用例中的阻断结果",
+      resultText:"HTTP 200 下金额从数字变为字符串，另有明细缺字段、状态码变化、取消状态变化和错误结构变化。修订版 10 个用例均通过，报告仍列出 5 项兼容变更。"
+    },
     searchlab: {
       category:"电商零售与搜索排序",audience:"购物用户、搜索运营和算法工程人员",
       summary:"顾客从搜索建议找到桌面用品，对比规格后加入购物袋。运营在评测台对比基线与候选方案，定位改善、误召回和无结果的查询。",
@@ -175,6 +183,7 @@
   }
 
   function productAction(id, p) {
+    if (id === "apiregression") return `<a class="pd-product" href="${p.mainURL}">打开验收台<span aria-hidden="true">↗</span></a><a class="pd-cta" href="${p.mainURL}&amp;candidate=candidate-b">运行修订版<span aria-hidden="true">↗</span></a>`;
     if (id === "manual") return `<a class="pd-product" href="${p.mainURL}">打开支持工作台<span aria-hidden="true">↗</span></a>`;
     if (id === "review") return `<a class="pd-product" href="${p.mainURL}">打开演示工作台<span aria-hidden="true">↗</span></a>`;
     if (id === "access") return `<a class="pd-product" href="${p.mainURL}">试用临时权限<span aria-hidden="true">↗</span></a>`;
@@ -201,7 +210,7 @@
             ${id==="funnel"?'<div><dt>接入项目</dt><dd><a href="#project/campus">校园场务</a></dd></div>':""}
             ${id==="campus"?'<div><dt>报名分析</dt><dd><a href="#project/funnel">产品转化分析台</a></dd></div>':""}
           </dl>
-          <div class="pd-actions">${productAction(id, p)}${["access","funnel","inventory","searchlab"].includes(id)?"":`<a class="pd-cta" href="${sampleLink(id)}">体验交互样例<span aria-hidden="true">↓</span></a>`}<a class="pd-read" href="${source(id)}">在线读源码<span aria-hidden="true">↗</span></a></div>
+          <div class="pd-actions">${productAction(id, p)}${["access","funnel","inventory","searchlab","apiregression"].includes(id)?"":`<a class="pd-cta" href="${sampleLink(id)}">体验交互样例<span aria-hidden="true">↓</span></a>`}<a class="pd-read" href="${source(id)}">在线读源码<span aria-hidden="true">↗</span></a></div>
         </header>
         ${galleryMarkup(id, record)}
       </div>
@@ -211,7 +220,7 @@
       <div class="pd-explore">
         <section class="pd-sample" id="sample" aria-labelledby="pd-sample-heading"><h2 id="pd-sample-heading">交互样例</h2><div id="sample-slot"></div>${serviceLinks(p)}</section>
         <aside class="pd-evidence" aria-labelledby="pd-evidence-title">
-          <p class="pd-label">${["funnel","inventory","searchlab"].includes(id)?"合成样例":"本机验证记录"}</p><h2 id="pd-evidence-title">${record.testTitle}</h2>
+          <p class="pd-label">${["funnel","inventory","searchlab","apiregression"].includes(id)?"合成样例":"本机验证记录"}</p><h2 id="pd-evidence-title">${record.testTitle}</h2>
           <div class="pd-measure"><strong>${record.result}</strong><span>${record.unit}</span></div>
           <p class="pd-measure-label">${record.resultLabel}</p><p class="pd-evidence-text">${record.resultText}</p>
         </aside>

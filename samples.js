@@ -391,7 +391,18 @@
     root.append(tag("p", "pbs-intro", "先在商店试搜“屏幕挂灯”，对比三种规格，再把有现货的款式加入购物袋。切到同词的排序对照，看这些挂灯是怎样被找到的。"), actions);
   }
 
-  const samples = { campus, ledger, incident, clinic, manual, review, access, funnel, inventory, searchlab };
+  function apiregression(root) {
+    const demo = projects.apiregression.mainURL;
+    const first = tag("a", "button primary", "检查首轮阻断项 ↗");
+    first.href = demo + "&candidate=candidate-a";
+    const second = tag("a", "button", "运行修订版本 ↗");
+    second.href = demo + "&candidate=candidate-b";
+    const actions = tag("div", "linkrow");
+    actions.append(first, second);
+    root.append(tag("p", "pbs-intro", "先用首轮候选版查看订单金额的类型差异，再运行修订版，核对通过结果和仍允许的变化。"), actions);
+  }
+
+  const samples = { campus, ledger, incident, clinic, manual, review, access, funnel, inventory, searchlab, apiregression };
   window.mountProjectSample = function (element, projectId) {
     if (!element) return;
     const root = tag("div", "pbs-sample");
