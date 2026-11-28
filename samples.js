@@ -457,7 +457,18 @@
     root.append(tag("p", "pbs-intro", "先查原始预约表的问题，再切到修复版用 Tab 和 Enter 完成一次预约。"), actions);
   }
 
-  const samples = { campus, ledger, incident, clinic, manual, review, access, funnel, inventory, searchlab, apiregression, coldchain, logprivacy, roster, lineage, a11y };
+  function canary(root) {
+    const demo = projects.canary.mainURL;
+    const regression = tag("a", "button primary", "回放回滚窗口 ↗");
+    regression.href = demo;
+    const stable = tag("a", "button", "查看稳定放量 ↗");
+    stable.href = demo + "&case=healthy";
+    const actions = tag("div", "linkrow");
+    actions.append(regression, stable);
+    root.append(tag("p", "pbs-intro", "核对回滚和放量案例中相同时间点的指标，找出形成建议的连续窗口。"), actions);
+  }
+
+  const samples = { campus, ledger, incident, clinic, manual, review, access, funnel, inventory, searchlab, apiregression, coldchain, logprivacy, roster, lineage, a11y, canary };
   window.mountProjectSample = function (element, projectId) {
     if (!element) return;
     const root = tag("div", "pbs-sample");

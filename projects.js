@@ -4,7 +4,7 @@ roleNames.optimization = "运筹优化";
 const industryNames = {campus:"校园教育",trade:"电商支付",platform:"跨行业运维平台",health:"智慧医疗",logistics:"物流与本地生活",content:"内容推荐",iot:"物联网"};
 const groups = [
   {id:"product",name:"产品研发",roles:["backend","web","mobile"],description:"从移动盘点、活动报名和门诊候补，看业务规则怎样落实到现场操作和接口。"},
-  {id:"platform",name:"平台可靠性",roles:["sre","qa"],description:"从故障响应和接口回归，看异常如何被发现、验证与追溯。"},
+  {id:"platform",name:"平台可靠性",roles:["sre","qa"],description:"从灰度发布、故障响应和接口回归，查看指标、验收规则和异常证据。"},
   {id:"data",name:"数据工程与物联网",roles:["data","iot"],description:"从账单、行为事件和设备遥测出发，核对指标、异常和原始数据。"},
   {id:"ai",name:"AI 与算法",roles:["ai","algo","optimization"],description:"从检索排序、证据评测和客服排班看规则如何落到可验证的算法结果。",planned:[
     ["带出处的制度问答","用固定版本的公开手册作答，核对每个引用，记录无依据问题的拒答情况。"]]},
@@ -15,6 +15,20 @@ industryNames.collaboration = "研发协作";
 industryNames.enterprise = "企业内部平台";
 industryNames.commerce = "电商零售";
 const projects = {
+  canary:{
+    name:"灰度发布决策台",version:"v1.0",sector:["platform","enterprise"],roles:["sre","qa","backend"],stack:"JavaScript / Node.js / 时序数据 / Canvas",
+    run:"canary-run.zip",mainURL:"demos/canary/index.html?v=1.0",extras:[],
+    pitch:"在灰度发布前后对照两版指标，按时间窗复核放量、持续观察或回滚建议。",
+    evidence:"回归样例切到 20% 流量后连续两窗越限，第 25 分钟建议回滚。候选 5xx 为 3.60%，稳定版为 0.40%。",
+    features:[["窗口回放","按五分钟查看稳定版和候选版的错误率、P95 延迟及有效样本。"],["可调整的判定规则","修改最低样本数、阈值或连续窗口数并重算，核对哪个窗口触发结论。"],["发布复核报告","切换放量、回归或样本不足案例，导入本地数据或下载报告。"]],
+    proof:{sre:"对照同期两组指标，流量变更重新计数；保留首个回滚时间和当时证据。",qa:"固定演练数据覆盖缺测、临界阈值、放量和回滚，并在命令行复跑。",backend:"对指标输入、窗口和阈值做校验，前端与 CLI 使用同一套判定逻辑。"},
+    note:"灰度流量加大后，什么时候该回滚？",teaser:"对照相同时间窗的新旧版本，把建议追溯到请求数、错误率和延迟。",
+    parts:[
+      ["按新旧版本拆开观察","同一窗口分别看稳定组与候选组，先核对请求数量，再按差值和延迟倍率判定。"],
+      ["用连续观测决定动作","20% 阶段的第 25 分钟形成第二个连续越限窗口，建议回滚。稍后恢复的窗口仍可以查看。"],
+      ["样本不足保留为观察","在样本稀少或缺测时继续观察。导出 JSON 可以带走原始输入和逐窗的判定依据。"]
+    ]
+  },
   a11y:{
     name:"无障碍走查工作台",version:"v1.0",sector:["campus","platform"],roles:["web","qa"],stack:"JavaScript / DOM / WCAG 2.2 / JSON",
     run:"a11y-run.zip",mainURL:"demos/a11y/index.html?v=1.0",extras:[],

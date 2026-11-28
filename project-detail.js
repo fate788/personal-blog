@@ -2,6 +2,14 @@
   "use strict";
 
   const cases = {
+    canary: {
+      category:"发布工程与 SRE",audience:"值班运维、测试和发布负责人",
+      summary:"回放每一窗的稳定与候选指标。对照样本量、错误率和窗口内 P95，核对继续观察、放量和回滚建议。",
+      images:["回归触发窗口","样本不足的观察窗口"],
+      process:[["选择回归窗口","定位 20% 流量阶段的第 25 分钟，核对两组指标和连续越限。"],["切换放量或缺测案例","查看什么情况下能提高流量，以及缺少数据时该检查什么。"],["用相同数据复跑","调整判定规则，导出逐窗报告，也可以导入自己的发布观测。"]],
+      testTitle:"哪段观测触发了回滚建议？",result:"25",unit:"分钟",resultLabel:"回归案例中的首个触发点",
+      resultText:"候选 5xx 3.60%，稳定版 0.40%。同窗 P95 为 340 与 200 毫秒。此前一窗已越限，第二个连续越限窗口触发建议。"
+    },
     a11y: {
       category:"Web 无障碍与质量验证",audience:"前端开发、设计和测试人员",
       summary:"打开同一套预约流程的原始与修复版本。定位自动检查失败的控件，再用键盘验证预约是否顺畅。",
@@ -228,6 +236,7 @@
     if (id === "roster") return `<a class="pd-product" href="${p.mainURL}">打开排班台<span aria-hidden="true">↗</span></a><a class="pd-cta" href="${p.mainURL}&amp;case=absence">查看请假缺口<span aria-hidden="true">↗</span></a>`;
     if (id === "lineage") return `<a class="pd-product" href="${p.mainURL}">打开影响分析<span aria-hidden="true">↗</span></a><a class="pd-cta" href="${p.mainURL}&amp;case=unused">查看未引用字段<span aria-hidden="true">↗</span></a>`;
     if (id === "a11y") return `<a class="pd-product" href="${p.mainURL}">打开走查台<span aria-hidden="true">↗</span></a><a class="pd-cta" href="${p.mainURL}&amp;view=fixed">体验修复版<span aria-hidden="true">↗</span></a>`;
+    if (id === "canary") return `<a class="pd-product" href="${p.mainURL}">查看回滚证据<span aria-hidden="true">↗</span></a><a class="pd-cta" href="${p.mainURL}&amp;case=sparse">查看样本不足<span aria-hidden="true">↗</span></a>`;
     if (id === "apiregression") return `<a class="pd-product" href="${p.mainURL}">打开验收台<span aria-hidden="true">↗</span></a><a class="pd-cta" href="${p.mainURL}&amp;candidate=candidate-b">运行修订版<span aria-hidden="true">↗</span></a>`;
     if (id === "manual") return `<a class="pd-product" href="${p.mainURL}">打开支持工作台<span aria-hidden="true">↗</span></a>`;
     if (id === "review") return `<a class="pd-product" href="${p.mainURL}">打开演示工作台<span aria-hidden="true">↗</span></a>`;
@@ -255,7 +264,7 @@
             ${id==="funnel"?'<div><dt>接入项目</dt><dd><a href="#project/campus">校园场务</a></dd></div>':""}
             ${id==="campus"?'<div><dt>报名分析</dt><dd><a href="#project/funnel">产品转化分析台</a></dd></div>':""}
           </dl>
-          <div class="pd-actions">${productAction(id, p)}${["access","funnel","inventory","searchlab","apiregression","coldchain","logprivacy","roster","lineage","a11y"].includes(id)?"":`<a class="pd-cta" href="${sampleLink(id)}">体验交互样例<span aria-hidden="true">↓</span></a>`}<a class="pd-read" href="${source(id)}">在线读源码<span aria-hidden="true">↗</span></a></div>
+          <div class="pd-actions">${productAction(id, p)}${["access","funnel","inventory","searchlab","apiregression","coldchain","logprivacy","roster","lineage","a11y","canary"].includes(id)?"":`<a class="pd-cta" href="${sampleLink(id)}">体验交互样例<span aria-hidden="true">↓</span></a>`}<a class="pd-read" href="${source(id)}">在线读源码<span aria-hidden="true">↗</span></a></div>
         </header>
         ${galleryMarkup(id, record)}
       </div>
@@ -265,7 +274,7 @@
       <div class="pd-explore">
         <section class="pd-sample" id="sample" aria-labelledby="pd-sample-heading"><h2 id="pd-sample-heading">交互样例</h2><div id="sample-slot"></div>${serviceLinks(p)}</section>
         <aside class="pd-evidence" aria-labelledby="pd-evidence-title">
-          <p class="pd-label">${["funnel","inventory","searchlab","apiregression","coldchain","logprivacy","roster","lineage","a11y"].includes(id)?"合成样例":"本机验证记录"}</p><h2 id="pd-evidence-title">${record.testTitle}</h2>
+          <p class="pd-label">${["funnel","inventory","searchlab","apiregression","coldchain","logprivacy","roster","lineage","a11y","canary"].includes(id)?"合成样例":"本机验证记录"}</p><h2 id="pd-evidence-title">${record.testTitle}</h2>
           <div class="pd-measure"><strong>${record.result}</strong><span>${record.unit}</span></div>
           <p class="pd-measure-label">${record.resultLabel}</p><p class="pd-evidence-text">${record.resultText}</p>
         </aside>

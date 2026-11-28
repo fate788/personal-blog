@@ -7,7 +7,7 @@ const entries=Object.entries(projects);
 const localPreview=["127.0.0.1","localhost"].includes(location.hostname) && location.port==="8795";
 const source=id=>"source/"+id+"/index.html";
 const zip=id=>"downloads/"+id+"-source.zip";
-const standaloneProjects=new Set(["inventory","searchlab","apiregression","coldchain","logprivacy","roster","lineage","a11y"]);
+const standaloneProjects=new Set(["inventory","searchlab","apiregression","coldchain","logprivacy","roster","lineage","a11y","canary"]);
 const caseLink=id=>standaloneProjects.has(id)?"projects/"+id+"/index.html":"#project/"+id;
 const sampleLink=id=>caseLink(id)+"?view=sample";
 const noteLink=id=>"#note/"+id;
@@ -15,6 +15,7 @@ const codePaths={manual:["engine.py",372],campus:["src/main/java/cn/campus/event
 const deepCode=id=>source(id)+"#"+new URLSearchParams({file:codePaths[id][0],line:codePaths[id][1]});
 const runtime={manual:"在线版可直接使用，手册和问题保存在当前浏览器。本地版需要 Python 3.10 或以上，解压后运行 start-manual.cmd 或 python server.py，默认端口 8799。手册版本和问题记录保存在 SQLite，可接本地模型。",campus:"Java 17 或以上，解压后运行 start-review.cmd，默认端口 8768。",ledger:"Python 3.10 或以上，解压后运行 start-review.cmd，默认端口 8792。",incident:"Python 3.10 或以上，解压后运行 start-incident.cmd，默认端口 8793。隔离演练可独立使用。",clinic:"解压后在项目目录运行 python server.py，默认端口 8796。排班和预约使用合成演示数据。"};
 const captions={
+  canary:["回归案例定位第 25 分钟的回滚建议与候选指标。","样本不足时按窗口核对缺测与继续观察的理由。"],
   a11y:["原始预约预览与可定位的检查发现。","修复版本的预约控件和复核记录。"],
   lineage:["退役金额时，查看交易看板和从原始订单到下游的路径。","逐字段核对直连依赖及变更前后信息。"],
   roster:["常规周覆盖 21 个席位，已确认安排带锁定标记。","周日晚间售后专席请假，可查看候选为何无法补位。"],
@@ -44,6 +45,7 @@ codePaths.logprivacy = ["engine.mjs",207];
 codePaths.roster = ["engine.mjs",255];
 codePaths.lineage = ["engine.mjs",225];
 codePaths.a11y = ["engine.mjs",157];
+codePaths.canary = ["engine.mjs",149];
 runtime.review = "浏览器演示可直接打开，使用虚构的 IT 服务台项目。完整运行包的构建和启动步骤见 README。";
 runtime.access = "在线版使用虚构报表和浏览器演练数据。Node.js 22.13 或以上版本可启动 SQLite 服务，也可配置团队账号与自己的资源。";
 runtime.funnel = "公开版在浏览器中使用合成样本，可亲自报名。完整运行包需要 Node.js 22.13 或以上版本，按 README 启动分析服务和校园场务联动。";
@@ -55,6 +57,7 @@ runtime.logprivacy = "公开版和离线网页都在当前浏览器内处理 JSO
 runtime.roster = "公开版在浏览器内求解。Node.js 22 或更新版本可运行 npm run build 生成离线界面，npm run roster 复跑样例。";
 runtime.lineage = "公开版在浏览器内检查导入清单。Node.js 22 或更新版本可用 npm run build 生成离线界面，CLI 可复跑各个案例。";
 runtime.a11y = "公开版在浏览器当前页面操作与检查。Node.js 22 或更新版本运行 npm run build 可生成离线工作台。";
+runtime.canary = "公开版在浏览器处理发布观测。Node.js 22 或更新版本运行 npm run build 生成离线工作台，CLI 支持导入与报告。";
 const textLink=(url,label)=>'<a class="textlink" href="'+url+'">'+label+'</a>';
 const button=(url,label,primary=false,download=false)=>'<a class="button'+(primary?' primary':'')+'" href="'+url+'"'+(download?' download':'')+'>'+label+'</a>';
 const routeTo=(role="",industry="",group="")=>{
