@@ -15,6 +15,7 @@
 .pd-case.pd-logprivacy { --pd-matte: #252e32; --pd-glow: #5c7067; }
 .pd-case.pd-roster { --pd-matte: #33304a; --pd-glow: #827b9b; }
 .pd-case.pd-lineage { --pd-matte: #183044; --pd-glow: #586d81; }
+.pd-case.pd-a11y { --pd-matte: #49323a; --pd-glow: #a37665; }
 .pd-case.pd-ledger { --pd-matte: #323b3c; --pd-glow: #5b6767; }
 .pd-case.pd-incident { --pd-matte: #2e343a; --pd-glow: #545f68; }
 .pd-case.pd-searchlab { --pd-accent: #6c5230; --pd-matte: #3e3431; --pd-glow: #756455; }

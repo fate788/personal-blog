@@ -5,11 +5,11 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const site = fileURLToPath(new URL("../", import.meta.url));
-const projects = ["campus", "ledger", "incident", "clinic", "manual", "review", "access", "funnel", "inventory", "searchlab", "apiregression", "coldchain", "logprivacy", "roster", "lineage"];
+const projects = ["campus", "ledger", "incident", "clinic", "manual", "review", "access", "funnel", "inventory", "searchlab", "apiregression", "coldchain", "logprivacy", "roster", "lineage", "a11y"];
 const inventoryDemo = "demos/inventory";
 const pages = [
-  "index.html", "projects/inventory/index.html", "projects/searchlab/index.html", "projects/apiregression/index.html", "projects/coldchain/index.html", "projects/logprivacy/index.html", "projects/roster/index.html", "projects/lineage/index.html",
-  ...projects.map(key => `source/${key}/index.html`), inventoryDemo + "/index.html", "demos/searchlab/index.html", "demos/apiregression/index.html", "demos/coldchain/index.html", "demos/logprivacy/index.html", "demos/roster/index.html", "demos/lineage/index.html"
+  "index.html", "projects/inventory/index.html", "projects/searchlab/index.html", "projects/apiregression/index.html", "projects/coldchain/index.html", "projects/logprivacy/index.html", "projects/roster/index.html", "projects/lineage/index.html", "projects/a11y/index.html",
+  ...projects.map(key => `source/${key}/index.html`), inventoryDemo + "/index.html", "demos/searchlab/index.html", "demos/apiregression/index.html", "demos/coldchain/index.html", "demos/logprivacy/index.html", "demos/roster/index.html", "demos/lineage/index.html", "demos/a11y/index.html"
 ];
 assert(statSync(path.join(site, "demos/review/index.html")).isFile(), "Missing requirements review demo");
 assert(statSync(path.join(site, "demos/manual/index.html")).isFile(), "Missing support workspace demo");
@@ -17,6 +17,8 @@ assert(statSync(path.join(site, "demos/access/index.html")).isFile(), "Missing t
 assert(statSync(path.join(site, "demos/funnel/index.html")).isFile(), "Missing product funnel demo");
 const dockPhoto = readFileSync(path.join(site, "demos/coldchain/media/cold-dock.webp"));
 assert.equal(dockPhoto.subarray(8, 12).toString("ascii"), "WEBP", "Missing cold-chain loading dock photo");
+const readingRoom = readFileSync(path.join(site, "demos/a11y/media/reading-room.webp"));
+assert.equal(readingRoom.subarray(8, 12).toString("ascii"), "WEBP", "Missing reading-room photo");
 const inventoryManifest = JSON.parse(readFileSync(path.join(site, inventoryDemo, "manifest.webmanifest"), "utf8"));
 assert(inventoryManifest.icons.some(icon => icon.sizes === "192x192"), "Missing inventory app icon");
 assert(inventoryManifest.icons.some(icon => icon.sizes === "512x512"), "Missing inventory installation icon");

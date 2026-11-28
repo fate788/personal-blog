@@ -446,7 +446,18 @@
     root.append(tag("p", "pbs-intro", "从金额字段追到看板，再用旧备注对照什么情况下清单中没有下游。"), actions);
   }
 
-  const samples = { campus, ledger, incident, clinic, manual, review, access, funnel, inventory, searchlab, apiregression, coldchain, logprivacy, roster, lineage };
+  function a11y(root) {
+    const demo = projects.a11y.mainURL;
+    const baseline = tag("a", "button primary", "查看原始问题 ↗");
+    baseline.href = demo;
+    const fixed = tag("a", "button", "体验修复流程 ↗");
+    fixed.href = demo + "&view=fixed";
+    const actions = tag("div", "linkrow");
+    actions.append(baseline, fixed);
+    root.append(tag("p", "pbs-intro", "先查原始预约表的问题，再切到修复版用 Tab 和 Enter 完成一次预约。"), actions);
+  }
+
+  const samples = { campus, ledger, incident, clinic, manual, review, access, funnel, inventory, searchlab, apiregression, coldchain, logprivacy, roster, lineage, a11y };
   window.mountProjectSample = function (element, projectId) {
     if (!element) return;
     const root = tag("div", "pbs-sample");

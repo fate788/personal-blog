@@ -15,6 +15,20 @@ industryNames.collaboration = "研发协作";
 industryNames.enterprise = "企业内部平台";
 industryNames.commerce = "电商零售";
 const projects = {
+  a11y:{
+    name:"无障碍走查工作台",version:"v1.0",sector:["campus","platform"],roles:["web","qa"],stack:"JavaScript / DOM / WCAG 2.2 / JSON",
+    run:"a11y-run.zip",mainURL:"demos/a11y/index.html?v=1.0",extras:[],
+    pitch:"在可操作的图书馆预约中定位无障碍问题，切换修复前后并记录实际键盘复核。",
+    evidence:"同一套 5 个自动检查点，原始预约预览发现 5 项问题，修复后为 0。键盘、可见焦点与提交反馈由操作人复核。",
+    features:[["实测预约预览","从实际 DOM 与计算样式检查标签、图像、按钮、对比度和标题结构。"],["修复对照","定位一条发现，再切到修复版检查同一个操作。"],["人工复核与导出","记录键盘操作、焦点和确认反馈。报告记录两个版本的结果。"]],
+    proof:{web:"用有语义的标签、按钮名称和确认状态改进预约流程，分别处理可读性和键盘可达性。",qa:"对两版运行同一组实际 DOM 规则，将测量结果和人工复核分开记录。"},
+    note:"预约流程的无障碍怎么验证？",teaser:"用真实控件和同一套检查前后对照，再把键盘体验留给人工复核。",
+    parts:[
+      ["先把发现定位到实际元素","选择某一项检查，查看预览中的对应控件以及失败依据，例如输入没有关联标签或文字对比偏低。"],
+      ["在修复版复跑同一组检查","为有意义的图片添加替代文本，为输入和按钮提供名称，并调整标题结构与文字对比。"],
+      ["单独记录键盘体验","使用 Tab 和 Enter 完成预约，核对焦点及确认提示，再导出自动检查和人工复核记录。"]
+    ]
+  },
   lineage:{
     name:"数据血缘影响台",version:"v1.0",sector:["commerce","enterprise"],roles:["data","backend","qa"],stack:"JavaScript / Node.js / 列级 DAG / JSON",
     run:"lineage-run.zip",mainURL:"demos/lineage/index.html?v=1.0",extras:[],

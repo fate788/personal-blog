@@ -2,6 +2,14 @@
   "use strict";
 
   const cases = {
+    a11y: {
+      category:"Web 无障碍与质量验证",audience:"前端开发、设计和测试人员",
+      summary:"打开同一套预约流程的原始与修复版本。定位自动检查失败的控件，再用键盘验证预约是否顺畅。",
+      images:["原始预约检查","修复版本复核"],
+      process:[["定位一个问题","运行检查并选择一项发现，例如预约姓名没有关联标签。"],["验证修复前后","切换修复版，同一条规则查看新结果，实际用键盘预约。"],["记录并导出","标记走查结果，下载包含两个版本的 JSON。"]],
+      testTitle:"修复后还剩几个已登记问题？",result:"5 → 0",unit:"项",resultLabel:"五项自动检查的失败数",
+      resultText:"两版使用同一组检查点。键盘操作、可见焦点和预约反馈另行人工验证。"
+    },
     lineage: {
       category:"数据工程与指标治理",audience:"数据模型、指标和业务看板维护人员",
       summary:"把字段变更与登记的血缘放在一起检查，核对受影响的表、指标和看板，明确每次连带影响的证据。",
@@ -219,6 +227,7 @@
     if (id === "logprivacy") return `<a class="pd-product" href="${p.mainURL}">打开抽检台<span aria-hidden="true">↗</span></a><a class="pd-cta" href="${p.mainURL}&amp;view=baseline">查看基线发现<span aria-hidden="true">↗</span></a>`;
     if (id === "roster") return `<a class="pd-product" href="${p.mainURL}">打开排班台<span aria-hidden="true">↗</span></a><a class="pd-cta" href="${p.mainURL}&amp;case=absence">查看请假缺口<span aria-hidden="true">↗</span></a>`;
     if (id === "lineage") return `<a class="pd-product" href="${p.mainURL}">打开影响分析<span aria-hidden="true">↗</span></a><a class="pd-cta" href="${p.mainURL}&amp;case=unused">查看未引用字段<span aria-hidden="true">↗</span></a>`;
+    if (id === "a11y") return `<a class="pd-product" href="${p.mainURL}">打开走查台<span aria-hidden="true">↗</span></a><a class="pd-cta" href="${p.mainURL}&amp;view=fixed">体验修复版<span aria-hidden="true">↗</span></a>`;
     if (id === "apiregression") return `<a class="pd-product" href="${p.mainURL}">打开验收台<span aria-hidden="true">↗</span></a><a class="pd-cta" href="${p.mainURL}&amp;candidate=candidate-b">运行修订版<span aria-hidden="true">↗</span></a>`;
     if (id === "manual") return `<a class="pd-product" href="${p.mainURL}">打开支持工作台<span aria-hidden="true">↗</span></a>`;
     if (id === "review") return `<a class="pd-product" href="${p.mainURL}">打开演示工作台<span aria-hidden="true">↗</span></a>`;
@@ -246,7 +255,7 @@
             ${id==="funnel"?'<div><dt>接入项目</dt><dd><a href="#project/campus">校园场务</a></dd></div>':""}
             ${id==="campus"?'<div><dt>报名分析</dt><dd><a href="#project/funnel">产品转化分析台</a></dd></div>':""}
           </dl>
-          <div class="pd-actions">${productAction(id, p)}${["access","funnel","inventory","searchlab","apiregression","coldchain","logprivacy","roster","lineage"].includes(id)?"":`<a class="pd-cta" href="${sampleLink(id)}">体验交互样例<span aria-hidden="true">↓</span></a>`}<a class="pd-read" href="${source(id)}">在线读源码<span aria-hidden="true">↗</span></a></div>
+          <div class="pd-actions">${productAction(id, p)}${["access","funnel","inventory","searchlab","apiregression","coldchain","logprivacy","roster","lineage","a11y"].includes(id)?"":`<a class="pd-cta" href="${sampleLink(id)}">体验交互样例<span aria-hidden="true">↓</span></a>`}<a class="pd-read" href="${source(id)}">在线读源码<span aria-hidden="true">↗</span></a></div>
         </header>
         ${galleryMarkup(id, record)}
       </div>
@@ -256,7 +265,7 @@
       <div class="pd-explore">
         <section class="pd-sample" id="sample" aria-labelledby="pd-sample-heading"><h2 id="pd-sample-heading">交互样例</h2><div id="sample-slot"></div>${serviceLinks(p)}</section>
         <aside class="pd-evidence" aria-labelledby="pd-evidence-title">
-          <p class="pd-label">${["funnel","inventory","searchlab","apiregression","coldchain","logprivacy","roster","lineage"].includes(id)?"合成样例":"本机验证记录"}</p><h2 id="pd-evidence-title">${record.testTitle}</h2>
+          <p class="pd-label">${["funnel","inventory","searchlab","apiregression","coldchain","logprivacy","roster","lineage","a11y"].includes(id)?"合成样例":"本机验证记录"}</p><h2 id="pd-evidence-title">${record.testTitle}</h2>
           <div class="pd-measure"><strong>${record.result}</strong><span>${record.unit}</span></div>
           <p class="pd-measure-label">${record.resultLabel}</p><p class="pd-evidence-text">${record.resultText}</p>
         </aside>

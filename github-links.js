@@ -3,6 +3,7 @@
 window.blogGitHub = {
   profile: "https://github.com/fate788",
   repositories: {
+    a11y: "https://github.com/fate788/accessibility-review",
     lineage: "https://github.com/fate788/data-lineage-impact",
     roster: "https://github.com/fate788/support-roster",
     logprivacy: "https://github.com/fate788/log-privacy-review",

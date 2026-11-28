@@ -10,6 +10,7 @@
 | 日志隐私抽检台 | [对照基线和候选规则](https://fate788.github.io/personal-blog/demos/logprivacy/index.html?v=1.0)，逐字段复核漏遮、误遮和导出状态 | [log-privacy-review](https://github.com/fate788/log-privacy-review) |
 | 客服排班工作台 | [按技能和请假安排一周班表](https://fate788.github.io/personal-blog/demos/roster/index.html?v=1.0)，保留已锁定的安排并复核班次缺口 | [support-roster](https://github.com/fate788/support-roster) |
 | 数据血缘影响台 | [追查订单字段的下游影响](https://fate788.github.io/personal-blog/demos/lineage/index.html?v=1.0)，核对受影响的表、指标、看板和逐段依赖 | [data-lineage-impact](https://github.com/fate788/data-lineage-impact) |
+| 无障碍走查工作台 | [复核图书馆预约流程](https://fate788.github.io/personal-blog/demos/a11y/index.html?v=1.0)，自动定位问题、切换修复版本并记录键盘复核 | [accessibility-review](https://github.com/fate788/accessibility-review) |
 | 接口回归验收台 | [打开发布评审](https://fate788.github.io/personal-blog/demos/apiregression/index.html?v=1.1)，筛查阻断用例，对照两版响应证据并复跑修订版 | [api-regression-lab](https://github.com/fate788/api-regression-lab) |
 | 商品搜索实验台 | [试搜桌面用品](https://fate788.github.io/personal-blog/demos/searchlab/index.html?v=1.2)，体验搜索建议、规格对比和购物袋，在评测台逐词核对排序 | [shop-search-lab](https://github.com/fate788/shop-search-lab) |
 | 移动盘点工作台 | [体验断网盘点与差异复核](https://fate788.github.io/personal-blog/demos/inventory/)，录入两份实点并追查复核依据 | [mobile-inventory](https://github.com/fate788/mobile-inventory) |
