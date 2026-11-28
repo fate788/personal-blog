@@ -5,16 +5,31 @@ const groups = [
   {id:"product",name:"产品研发",roles:["backend","web","mobile"],description:"从移动盘点、活动报名和门诊候补，看业务规则怎样落实到现场操作和接口。"},
   {id:"platform",name:"平台可靠性",roles:["sre","qa"],description:"从故障响应和接口回归，看异常如何被发现、验证与追溯。"},
   {id:"data",name:"数据工程",roles:["data"],description:"从账单原始行和行为事件出发，核对业务指标、差异与来源。"},
-  {id:"ai",name:"AI 与算法",roles:["ai","algo"],description:"关注检索结果的依据、排序效果与可重复的评测。",planned:[
-    ["带出处的制度问答","用固定版本的公开手册作答，核对每个引用，记录无依据问题的拒答情况。"],
-    ["站内搜索评测台","固定查询与候选文档，对照关键词检索，逐条分析搜索排序的改善和退化。"]]},
+  {id:"ai",name:"AI 与算法",roles:["ai","algo"],description:"商品搜索比较召回和排序。手册检索查看答复出处与证据。",planned:[
+    ["带出处的制度问答","用固定版本的公开手册作答，核对每个引用，记录无依据问题的拒答情况。"]]},
   {id:"security",name:"应用安全与隐私",roles:["security"],description:"从临时授权和访问审计，看系统如何控制用户能访问的资源。",planned:[
     ["日志隐私抽检工具","在合成日志中标注敏感字段，统计漏脱和误脱，检查保留的信息能否支持排障。"]]}
 ];
 industryNames.support = "产品帮助中心";
 industryNames.collaboration = "研发协作";
 industryNames.enterprise = "企业内部平台";
+industryNames.commerce = "电商零售";
 const projects = {
+  searchlab:{
+    name:"商品搜索实验台",version:"v1.0",sector:["commerce"],roles:["algo","web"],stack:"JavaScript / Node.js / 相关性评测",
+    run:"searchlab-run.zip",mainURL:"demos/searchlab/index.html",evaluationURL:"demos/searchlab/index.html#evaluation",extras:[["本机实验台","http://127.0.0.1:8818/"]],
+    pitch:"顾客可以按口语、商品名或 SKU 找桌面用品。运营用同一批查询对照两种排序，逐条核对改善、退步和无结果。",
+    evidence:"56 件商品、23 条合成查询。19 条有相关商品的查询上，nDCG@5 从 0.246 升至 0.979。候选也增加了误召回，逐条对照可核查。",
+    features:[["体验真实检索","输入货号和商品词，按分类、价格和库存筛选。"],["重跑排序对照","用同一套目录和相关性标注计算 nDCG@5、MRR 与无结果数。"],["核对失败样例","打开单条查询看两套前五名及商品判分，导出逐条对照 CSV。"]],
+    proof:{algo:"把检索算法和固定标注分开。用相同查询比较两种召回和排序方案，逐条追查指标变化。",web:"同一套搜索数据连接顾客端与评测端。顾客使用结果与筛选，运营打开同词的排序和标注核对。"},
+    note:"一条电商搜索词，怎么判断排序改得好不好？",
+    teaser:"从顾客的口语查询出发，用人工标注、前五名对照和可复跑指标检查搜索改动。",
+    parts:[
+      ["固定目录和查询","顾客会说“屏幕挂灯”，商品标题却用“显示器挂灯”。把这类口语别称和商品名、SKU 一同写进样例，按搜索意图为商品分级。两种方案使用同一组标签。"],
+      ["检查排序和召回","nDCG@5 根据前五名的顺序和相关性分级给分。这里的 MRR 关注前五名中第一条相关结果出现得多早。从无结果的查询可以排查目录覆盖或召回规则。"],
+      ["追到误召回的那一条","“HDMI 分线器”在基线排出一件正确商品。候选仍把它排第一，却多召回一件只有一个 HDMI 口的扩展坞。关掉同义词扩展后又只返回正确商品。样例中的汇总改善和逐条误差都可以复跑。"]
+    ]
+  },
   inventory:{
     name:"移动盘点工作台",version:"v1.1",sector:["logistics"],roles:["mobile","backend","web"],stack:"可安装 Web 应用（PWA） / IndexedDB / Node.js / SQLite",
     run:"inventory-run.zip",mainURL:"demos/inventory/index.html",extras:[["本机工作台","http://127.0.0.1:8808/"]],

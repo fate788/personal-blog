@@ -6,6 +6,7 @@
 
 | 作品 | 可以体验的内容 | 独立源码仓库 |
 | --- | --- | --- |
+| 商品搜索实验台 | [试搜桌面用品](https://fate788.github.io/personal-blog/demos/searchlab/)，在评测台检查两种排序和真实计算的逐条指标 | [shop-search-lab](https://github.com/fate788/shop-search-lab) |
 | 移动盘点工作台 | [体验断网盘点与差异复核](https://fate788.github.io/personal-blog/demos/inventory/)，录入两份实点并追查复核依据 | [mobile-inventory](https://github.com/fate788/mobile-inventory) |
 | 产品转化分析台 | [查看活动报名漏斗](https://fate788.github.io/personal-blog/demos/funnel/)，体验一次隔离报名并核对自己的新事件 | [product-funnel](https://github.com/fate788/product-funnel) |
 | 企业临时权限工作台 | [体验报表申请与到期回收](https://fate788.github.io/personal-blog/demos/access/)，核对审批前、授权中和到期后的访问结果 | [temporary-access](https://github.com/fate788/temporary-access) |

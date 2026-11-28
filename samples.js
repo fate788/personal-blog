@@ -377,7 +377,20 @@
     root.append(tag("p", "pbs-intro", "以第一位仓员身份给 A01 的牛皮纸封箱胶带录入 23 卷。恢复联网后同步，切换第二位仓员录入 24 卷，再到主管工作台复核。"), link);
   }
 
-  const samples = { campus, ledger, incident, clinic, manual, review, access, funnel, inventory };
+  function searchlab(root) {
+    const query = encodeURIComponent("屏幕挂灯");
+    const shop = tag("a", "button primary", "试搜屏幕挂灯 ↗");
+    shop.href = "demos/searchlab/index.html#shop?q=" + query;
+    const evaluation = tag("a", "button", "查看同词的排序对照 ↗");
+    evaluation.href = "demos/searchlab/index.html#evaluation?q=" + query;
+    const wrongHit = tag("a", "textlink", "查看一次误召回 ↗");
+    wrongHit.href = "demos/searchlab/index.html#evaluation?q=hdmi-splitter&outcome=more-unrelated";
+    const actions = tag("div", "linkrow");
+    actions.append(shop, evaluation, wrongHit);
+    root.append(tag("p", "pbs-intro", "先在商店试搜“屏幕挂灯”。再打开同词的排序对照，检查目录里的显示器挂灯是怎样被找到的。"), actions);
+  }
+
+  const samples = { campus, ledger, incident, clinic, manual, review, access, funnel, inventory, searchlab };
   window.mountProjectSample = function (element, projectId) {
     if (!element) return;
     const root = tag("div", "pbs-sample");

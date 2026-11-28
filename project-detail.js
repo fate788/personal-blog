@@ -2,6 +2,15 @@
   "use strict";
 
   const cases = {
+    searchlab: {
+      category:"电商零售与搜索排序",audience:"购物用户、搜索运营和算法工程人员",
+      summary:"顾客在商店里用商品名、口语和货号找桌面用品。运营在评测台对比基线与候选方案，定位改善、退步和无结果的查询。",
+      images:["顾客端搜索","运营端评测"],
+      process:[["先试搜一件商品","输入“屏幕挂灯”，看看目录里的显示器挂灯能否找到，再试用分类、价格和库存筛选。"],["复跑同一批查询","进入评测台，使用同一份目录和相关性标注比较 nDCG@5、MRR 与无结果。"],["查看具体哪一条变了","点开查询对照两边的前五名和商品相关性。可导出逐条对照 CSV，继续核对。"]],
+      testTitle:"“屏幕挂灯”为什么能找到商品？",
+      result:"0 → 3",unit:"件",resultLabel:"同义词打开时，该查询的相关商品数",
+      resultText:"候选匹配到“显示器挂灯”，找到 3 件预先标为完全相关的商品。23 条合成查询里，无结果数从 17 条降到 3 条。逐条检查也发现了误召回，例如“HDMI 分线器”多出一个不相关结果。"
+    },
     inventory: {
       category:"移动端与仓储作业",audience:"现场盘点员、复点员与仓库主管",
       summary:"仓员在货架边直接点货。离线保存结果，网络恢复后再补传。有分歧时，主管能核对两份原始记录及处理理由。",
@@ -171,6 +180,7 @@
     if (id === "access") return `<a class="pd-product" href="${p.mainURL}">试用临时权限<span aria-hidden="true">↗</span></a>`;
     if (id === "funnel") return `<a class="pd-product" href="${p.mainURL}">打开分析工作台<span aria-hidden="true">↗</span></a>`;
     if (id === "inventory") return `<a class="pd-product" href="${p.mainURL}">打开盘点工作台<span aria-hidden="true">↗</span></a>`;
+    if (id === "searchlab") return `<a class="pd-product" href="${p.mainURL}">试搜商品<span aria-hidden="true">↗</span></a><a class="pd-cta" href="${p.evaluationURL}">打开评测台<span aria-hidden="true">↗</span></a>`;
     if (!localPreview) return "";
     const url = id === "campus" ? p.extras.find(([label]) => label === "同实例学生端")[1] : p.mainURL;
     const label = id === "campus" ? "打开学生端" : id === "manual" ? "打开检索室" : "打开工作台";
@@ -191,7 +201,7 @@
             ${id==="funnel"?'<div><dt>接入项目</dt><dd><a href="#project/campus">校园场务</a></dd></div>':""}
             ${id==="campus"?'<div><dt>报名分析</dt><dd><a href="#project/funnel">产品转化分析台</a></dd></div>':""}
           </dl>
-          <div class="pd-actions">${productAction(id, p)}${["access","funnel","inventory"].includes(id)?"":`<a class="pd-cta" href="${sampleLink(id)}">体验交互样例<span aria-hidden="true">↓</span></a>`}<a class="pd-read" href="${source(id)}">在线读源码<span aria-hidden="true">↗</span></a></div>
+          <div class="pd-actions">${productAction(id, p)}${["access","funnel","inventory","searchlab"].includes(id)?"":`<a class="pd-cta" href="${sampleLink(id)}">体验交互样例<span aria-hidden="true">↓</span></a>`}<a class="pd-read" href="${source(id)}">在线读源码<span aria-hidden="true">↗</span></a></div>
         </header>
         ${galleryMarkup(id, record)}
       </div>
@@ -201,7 +211,7 @@
       <div class="pd-explore">
         <section class="pd-sample" id="sample" aria-labelledby="pd-sample-heading"><h2 id="pd-sample-heading">交互样例</h2><div id="sample-slot"></div>${serviceLinks(p)}</section>
         <aside class="pd-evidence" aria-labelledby="pd-evidence-title">
-          <p class="pd-label">${["funnel","inventory"].includes(id)?"合成样例":"本机验证记录"}</p><h2 id="pd-evidence-title">${record.testTitle}</h2>
+          <p class="pd-label">${["funnel","inventory","searchlab"].includes(id)?"合成样例":"本机验证记录"}</p><h2 id="pd-evidence-title">${record.testTitle}</h2>
           <div class="pd-measure"><strong>${record.result}</strong><span>${record.unit}</span></div>
           <p class="pd-measure-label">${record.resultLabel}</p><p class="pd-evidence-text">${record.resultText}</p>
         </aside>

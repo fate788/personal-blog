@@ -12,6 +12,7 @@
 .pd-case.pd-campus { --pd-matte: #463f3c; --pd-glow: #6c6158; }
 .pd-case.pd-ledger { --pd-matte: #323b3c; --pd-glow: #5b6767; }
 .pd-case.pd-incident { --pd-matte: #2e343a; --pd-glow: #545f68; }
+.pd-case.pd-searchlab { --pd-accent: #6c5230; --pd-matte: #3e3431; --pd-glow: #756455; }
 .pd-case h2 { font-size: clamp(21px, 1.9vw, 28px); line-height: 1.4; font-weight: 650; letter-spacing: -.025em; }
 .pd-case h3 { font-weight: 620; }
 .pd-crumb { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; color: #536067; font-size: 12px; line-height: 1.6; }
