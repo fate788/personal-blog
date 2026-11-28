@@ -402,7 +402,18 @@
     root.append(tag("p", "pbs-intro", "先打开订单金额断言，对照两版原始 JSON，再运行修订版核对放行结论和允许的变更。"), actions);
   }
 
-  const samples = { campus, ledger, incident, clinic, manual, review, access, funnel, inventory, searchlab, apiregression };
+  function coldchain(root) {
+    const demo = projects.coldchain.mainURL;
+    const excursion = tag("a", "button primary", "回放持续超温 ↗");
+    excursion.href = demo + "&trip=cc-1028";
+    const gap = tag("a", "button", "核对传感器断报 ↗");
+    gap.href = demo + "&trip=cc-1026";
+    const actions = tag("div", "linkrow");
+    actions.append(excursion, gap);
+    root.append(tag("p", "pbs-intro", "先看 25 分钟的连续超温采样，再打开断报车次，确认缺少的 5 次采样如何影响证据。"), actions);
+  }
+
+  const samples = { campus, ledger, incident, clinic, manual, review, access, funnel, inventory, searchlab, apiregression, coldchain };
   window.mountProjectSample = function (element, projectId) {
     if (!element) return;
     const root = tag("div", "pbs-sample");

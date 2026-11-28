@@ -1,10 +1,10 @@
 "use strict";
-const roleNames = {backend:"业务后端",web:"Web 前端",mobile:"移动客户端",sre:"运维开发 / SRE",qa:"测试开发",data:"数据工程",ai:"AI 应用",algo:"搜索与推荐算法",security:"应用安全与隐私"};
+const roleNames = {backend:"业务后端",web:"Web 前端",mobile:"移动客户端",sre:"运维开发 / SRE",qa:"测试开发",data:"数据工程",ai:"AI 应用",algo:"搜索与推荐算法",security:"应用安全与隐私",iot:"物联网应用开发"};
 const industryNames = {campus:"校园教育",trade:"电商支付",platform:"跨行业运维平台",health:"智慧医疗",logistics:"物流与本地生活",content:"内容推荐",iot:"物联网"};
 const groups = [
   {id:"product",name:"产品研发",roles:["backend","web","mobile"],description:"从移动盘点、活动报名和门诊候补，看业务规则怎样落实到现场操作和接口。"},
   {id:"platform",name:"平台可靠性",roles:["sre","qa"],description:"从故障响应和接口回归，看异常如何被发现、验证与追溯。"},
-  {id:"data",name:"数据工程",roles:["data"],description:"从账单原始行和行为事件出发，核对业务指标、差异与来源。"},
+  {id:"data",name:"数据工程与物联网",roles:["data","iot"],description:"从账单、行为事件和设备遥测出发，核对指标、异常和原始数据。"},
   {id:"ai",name:"AI 与算法",roles:["ai","algo"],description:"商品搜索比较召回和排序。手册检索查看答复出处与证据。",planned:[
     ["带出处的制度问答","用固定版本的公开手册作答，核对每个引用，记录无依据问题的拒答情况。"]]},
   {id:"security",name:"应用安全与隐私",roles:["security"],description:"从临时授权和访问审计，看系统如何控制用户能访问的资源。",planned:[
@@ -15,6 +15,21 @@ industryNames.collaboration = "研发协作";
 industryNames.enterprise = "企业内部平台";
 industryNames.commerce = "电商零售";
 const projects = {
+  coldchain:{
+    name:"冷链运输追溯台",version:"v1.0",sector:["logistics","iot"],roles:["iot","data","backend","web"],stack:"JavaScript / Node.js / SQLite / 时序数据",
+    run:"coldchain-run.zip",mainURL:"demos/coldchain/index.html?v=1.0",extras:[["本机追溯台","http://127.0.0.1:8830/"]],
+    pitch:"按时间回放车厢温度与运输节点，区分连续超温和传感器断报，给下一班留下可追查的交接记录。",
+    evidence:"滨江车次已观测超温跨度 25 分钟，最高 10.8 ℃。江北车次缺少 5 次预期采样，缺测区间的温度标为未知。",
+    features:[["运输回放","选择车次，按时间回看观测温度、车辆节点和开门记录。"],["超温与断报证据","在样例阈值下识别连续超温，根据采样间隔识别缺失，两种证据单独展示。"],["调度交接","对异常保存处置动作和说明，回放证据和交接记录可复查。"]],
+    proof:{iot:"按五分钟采样日程识别设备断报，回放折线在证据缺失处断开。",data:"清理重复采样并按时间排序，以回放时刻为界生成事件和已观测温度统计。",backend:"本机服务用 HTTP 提供样例遥测。交接写入 SQLite，重复提交保留原记录。",web:"将运输节点、温度曲线、异常清单和交接放在同一场景中，可在桌面或手机查看。"},
+    note:"传感器断报时，为什么折线要空出一段？",
+    teaser:"同一套调度台里，持续超温和没有读数的区间会分别怎样呈现。",
+    parts:[
+      ["先看能确认的温度","滨江车次从 08:40 到 09:05 的采样均超出样例 8 ℃ 上限，已观测的跨度为 25 分钟，最高 10.8 ℃。09:10 的下一条观测才恢复到区间内。"],
+      ["保留缺口的边界","江北车次从 13:30 起缺了 5 次预期采样，13:55 恢复。回放曲线在缺口处断开，调度员可以核对断报前后的原始样例读数。"],
+      ["用交接说明保留判断依据","处置记录跟随异常事件，保存动作、说明和时间。下一次打开时仍可查回。阈值和场景均为演练设置。"]
+    ]
+  },
   apiregression:{
     name:"接口回归验收台",version:"v1.1",sector:["commerce","platform"],roles:["qa","backend","sre"],stack:"JavaScript / Node.js / HTTP / GitHub Actions",
     run:"apiregression-run.zip",mainURL:"demos/apiregression/index.html?v=1.1",extras:[["本机验收台","http://127.0.0.1:8824/"]],

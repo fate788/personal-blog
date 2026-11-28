@@ -7,7 +7,7 @@ const entries=Object.entries(projects);
 const localPreview=["127.0.0.1","localhost"].includes(location.hostname) && location.port==="8795";
 const source=id=>"source/"+id+"/index.html";
 const zip=id=>"downloads/"+id+"-source.zip";
-const standaloneProjects=new Set(["inventory","searchlab","apiregression"]);
+const standaloneProjects=new Set(["inventory","searchlab","apiregression","coldchain"]);
 const caseLink=id=>standaloneProjects.has(id)?"projects/"+id+"/index.html":"#project/"+id;
 const sampleLink=id=>caseLink(id)+"?view=sample";
 const noteLink=id=>"#note/"+id;
@@ -15,6 +15,7 @@ const codePaths={manual:["engine.py",372],campus:["src/main/java/cn/campus/event
 const deepCode=id=>source(id)+"#"+new URLSearchParams({file:codePaths[id][0],line:codePaths[id][1]});
 const runtime={manual:"在线版可直接使用，手册和问题保存在当前浏览器。本地版需要 Python 3.10 或以上，解压后运行 start-manual.cmd 或 python server.py，默认端口 8799。手册版本和问题记录保存在 SQLite，可接本地模型。",campus:"Java 17 或以上，解压后运行 start-review.cmd，默认端口 8768。",ledger:"Python 3.10 或以上，解压后运行 start-review.cmd，默认端口 8792。",incident:"Python 3.10 或以上，解压后运行 start-incident.cmd，默认端口 8793。隔离演练可独立使用。",clinic:"解压后在项目目录运行 python server.py，默认端口 8796。排班和预约使用合成演示数据。"};
 const captions={
+  coldchain:["滨江配送回放显示持续超温、记录峰值和运输节点。","江北传感器断报时，曲线留空，恢复读数和交接记录可核对。"],
   apiregression:["发布评审并列展示两个版本的验收结论，左侧可搜索用例或筛查阻断项。","两版订单详情均返回 HTTP 200。断言并排显示基线数字 29900 和候选字符串，并高亮 JSON 原文。"],
   searchlab:["桌面用品商店支持类目浏览、搜索建议、型号对比及购物袋。商品图片为生成的示意图。","按查询核对基线和候选的排名、商品相关性与指标差值。"],
   inventory:["手机盘点可按库位查找商品和录入数量，掉线后先把新记录保存在待同步队列。","主管对照账面和两份实点记录，录入最终数量并保留复核依据。"],
@@ -34,12 +35,14 @@ codePaths.funnel = ["analytics.mjs",82];
 codePaths.inventory = ["domain.mjs",108];
 codePaths.searchlab = ["engine.mjs",184];
 codePaths.apiregression = ["engine.mjs",106];
+codePaths.coldchain = ["domain.mjs",189];
 runtime.review = "浏览器演示可直接打开，使用虚构的 IT 服务台项目。完整运行包的构建和启动步骤见 README。";
 runtime.access = "在线版使用虚构报表和浏览器演练数据。Node.js 22.13 或以上版本可启动 SQLite 服务，也可配置团队账号与自己的资源。";
 runtime.funnel = "公开版在浏览器中使用合成样本，可亲自报名。完整运行包需要 Node.js 22.13 或以上版本，按 README 启动分析服务和校园场务联动。";
 runtime.inventory = "公开版是同一浏览器内的独立盘点演练，可切换身份并模拟断网。本机版需要 Node.js 22.13 或以上版本，支持独立账号、SQLite 和浏览器离线队列，配置见项目 README。";
 runtime.searchlab = "公开版可直接搜索、对比规格、体验购物袋并复跑评测。商品和查询标注为合成演示数据。完整运行包需要 Node.js 20 或以上版本，解压后运行 start-search.cmd 或 node server.mjs。";
 runtime.apiregression = "公开版可直接运行两份合成响应的验收。本机版需要 Node.js 20 或以上版本，双击 start-regression.cmd 或执行 node server.mjs。命令行可用于流水线。";
+runtime.coldchain = "公开体验使用合成车次，交接保存在当前浏览器。本机服务需要 Node.js 22.13 或以上，双击 start-coldchain.cmd 或执行 node server.mjs，交接写入 SQLite。";
 const textLink=(url,label)=>'<a class="textlink" href="'+url+'">'+label+'</a>';
 const button=(url,label,primary=false,download=false)=>'<a class="button'+(primary?' primary':'')+'" href="'+url+'"'+(download?' download':'')+'>'+label+'</a>';
 const routeTo=(role="",industry="",group="")=>{

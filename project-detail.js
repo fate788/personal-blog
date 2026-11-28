@@ -2,6 +2,14 @@
   "use strict";
 
   const cases = {
+    coldchain: {
+      category:"物联网与物流调度",audience:"物流调度、现场收货与下一班交接人员",
+      summary:"用三趟模拟配送回看温度、运输节点和缺失采样。看到超温时复核持续时间，遇到断报时标记证据缺口，再提交交接。",
+      images:["持续超温回放","传感器断报"],
+      process:[["选择一趟运输","从车次列表打开滨江配送，拖动回放观察采样和运输节点。"],["核对两类异常","追查连续超温的温度和时长，切换江北车次查看断报前后的证据。"],["保存交接","选择处置动作，填写说明。重新打开该异常，核对已保存的交接记录。"]],
+      testTitle:"这次超温的观测跨度是多少？",result:"25",unit:"分钟",resultLabel:"滨江车次首末越限采样之间的时长",
+      resultText:"08:40 至 09:05 的采样持续越限，最高 10.8 ℃。另一趟江北车次缺少 5 次预期采样，断报区间的温度保留未知。"
+    },
     apiregression: {
       category:"接口测试与发布验收",audience:"测试开发、后端开发和发布负责人",
       summary:"在同一工作台查看基线、候选版本和放行结论。搜索用例并核对原始响应，也可用链接把具体断言发给同事。",
@@ -183,6 +191,7 @@
   }
 
   function productAction(id, p) {
+    if (id === "coldchain") return `<a class="pd-product" href="${p.mainURL}">打开运输追溯<span aria-hidden="true">↗</span></a><a class="pd-cta" href="${p.mainURL}&amp;trip=cc-1026">查看断报车次<span aria-hidden="true">↗</span></a>`;
     if (id === "apiregression") return `<a class="pd-product" href="${p.mainURL}">打开验收台<span aria-hidden="true">↗</span></a><a class="pd-cta" href="${p.mainURL}&amp;candidate=candidate-b">运行修订版<span aria-hidden="true">↗</span></a>`;
     if (id === "manual") return `<a class="pd-product" href="${p.mainURL}">打开支持工作台<span aria-hidden="true">↗</span></a>`;
     if (id === "review") return `<a class="pd-product" href="${p.mainURL}">打开演示工作台<span aria-hidden="true">↗</span></a>`;
@@ -210,7 +219,7 @@
             ${id==="funnel"?'<div><dt>接入项目</dt><dd><a href="#project/campus">校园场务</a></dd></div>':""}
             ${id==="campus"?'<div><dt>报名分析</dt><dd><a href="#project/funnel">产品转化分析台</a></dd></div>':""}
           </dl>
-          <div class="pd-actions">${productAction(id, p)}${["access","funnel","inventory","searchlab","apiregression"].includes(id)?"":`<a class="pd-cta" href="${sampleLink(id)}">体验交互样例<span aria-hidden="true">↓</span></a>`}<a class="pd-read" href="${source(id)}">在线读源码<span aria-hidden="true">↗</span></a></div>
+          <div class="pd-actions">${productAction(id, p)}${["access","funnel","inventory","searchlab","apiregression","coldchain"].includes(id)?"":`<a class="pd-cta" href="${sampleLink(id)}">体验交互样例<span aria-hidden="true">↓</span></a>`}<a class="pd-read" href="${source(id)}">在线读源码<span aria-hidden="true">↗</span></a></div>
         </header>
         ${galleryMarkup(id, record)}
       </div>
@@ -220,7 +229,7 @@
       <div class="pd-explore">
         <section class="pd-sample" id="sample" aria-labelledby="pd-sample-heading"><h2 id="pd-sample-heading">交互样例</h2><div id="sample-slot"></div>${serviceLinks(p)}</section>
         <aside class="pd-evidence" aria-labelledby="pd-evidence-title">
-          <p class="pd-label">${["funnel","inventory","searchlab","apiregression"].includes(id)?"合成样例":"本机验证记录"}</p><h2 id="pd-evidence-title">${record.testTitle}</h2>
+          <p class="pd-label">${["funnel","inventory","searchlab","apiregression","coldchain"].includes(id)?"合成样例":"本机验证记录"}</p><h2 id="pd-evidence-title">${record.testTitle}</h2>
           <div class="pd-measure"><strong>${record.result}</strong><span>${record.unit}</span></div>
           <p class="pd-measure-label">${record.resultLabel}</p><p class="pd-evidence-text">${record.resultText}</p>
         </aside>
