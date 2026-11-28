@@ -3,6 +3,7 @@
 window.blogGitHub = {
   profile: "https://github.com/fate788",
   repositories: {
+    logprivacy: "https://github.com/fate788/log-privacy-review",
     coldchain: "https://github.com/fate788/coldchain-trace",
     apiregression: "https://github.com/fate788/api-regression-lab",
     review: "https://github.com/fate788/requirements-review-workbench",

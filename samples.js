@@ -413,7 +413,18 @@
     root.append(tag("p", "pbs-intro", "先看 25 分钟的连续超温采样，再打开断报车次，确认缺少的 5 次采样如何影响证据。"), actions);
   }
 
-  const samples = { campus, ledger, incident, clinic, manual, review, access, funnel, inventory, searchlab, apiregression, coldchain };
+  function logprivacy(root) {
+    const demo = projects.logprivacy.mainURL;
+    const baseline = tag("a", "button primary", "定位基线问题 ↗");
+    baseline.href = demo + "&view=baseline";
+    const candidate = tag("a", "button", "检查候选规则 ↗");
+    candidate.href = demo;
+    const actions = tag("div", "linkrow");
+    actions.append(baseline, candidate);
+    root.append(tag("p", "pbs-intro", "打开基线定位漏遮与误遮，再切到候选规则，核对诊断字段和导出状态。"), actions);
+  }
+
+  const samples = { campus, ledger, incident, clinic, manual, review, access, funnel, inventory, searchlab, apiregression, coldchain, logprivacy };
   window.mountProjectSample = function (element, projectId) {
     if (!element) return;
     const root = tag("div", "pbs-sample");

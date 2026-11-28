@@ -7,14 +7,27 @@ const groups = [
   {id:"data",name:"数据工程与物联网",roles:["data","iot"],description:"从账单、行为事件和设备遥测出发，核对指标、异常和原始数据。"},
   {id:"ai",name:"AI 与算法",roles:["ai","algo"],description:"商品搜索比较召回和排序。手册检索查看答复出处与证据。",planned:[
     ["带出处的制度问答","用固定版本的公开手册作答，核对每个引用，记录无依据问题的拒答情况。"]]},
-  {id:"security",name:"应用安全与隐私",roles:["security"],description:"从临时授权和访问审计，看系统如何控制用户能访问的资源。",planned:[
-    ["日志隐私抽检工具","在合成日志中标注敏感字段，统计漏脱和误脱，检查保留的信息能否支持排障。"]]}
+  {id:"security",name:"应用安全与隐私",roles:["security"],description:"从临时授权、访问审计和日志脱敏，看权限和数据如何得到保护。"}
 ];
 industryNames.support = "产品帮助中心";
 industryNames.collaboration = "研发协作";
 industryNames.enterprise = "企业内部平台";
 industryNames.commerce = "电商零售";
 const projects = {
+  logprivacy:{
+    name:"日志隐私抽检台",version:"v1.0",sector:["platform","enterprise"],roles:["security","sre","qa"],stack:"JavaScript / Node.js / JSONL / GitHub Actions",
+    run:"logprivacy-run.zip",mainURL:"demos/logprivacy/index.html?v=1.0",extras:[],
+    pitch:"在同一批日志上复跑两套脱敏规则，核对敏感值有没有漏遮，以及追踪 ID 等排障信息有没有误遮。",
+    evidence:"12 行合成日志。基线漏遮 3 处、误遮 13 处，候选规则在该标注批次中两项均为 0。",
+    features:[["规则对照","查看基线与候选的结果，切换正文扫描和追踪字段保留，回看受影响的记录。"],["逐行复核","查看原始与脱敏后的 JSON，分别定位字段路径、问题类型和判定依据。"],["本地导入与导出","浏览器内处理 JSONL。对符合当前规则的批次导出脱敏日志，也可导出仅含审查统计与发现的报告。"]],
+    proof:{security:"逐项标注需遮蔽的内容，导出前复核残余发现。导入数据只在当前浏览器内处理。",sre:"保留 trace_id、状态码等排障字段，用同一批数据验证脱敏后的可读性。",qa:"用固定标注数据断言漏遮与误遮数量，浏览器和命令行共享检查逻辑。"},
+    note:"脱敏同时保留排障线索",teaser:"用一批带标注的日志复查两种代价，分别是敏感值漏遮和诊断字段误遮。",
+    parts:[
+      ["从同一批数据对照","基线仅处理字段，漏掉正文中的 3 处敏感值，同时遮住 13 处排障字段。"],
+      ["看清规则改在哪里","候选开启正文扫描并保留追踪字段。逐行查看字段路径和变化，可审查全局数字背后的具体记录。"],
+      ["导出前检验","样例使用逐项标注。导入批次按内置模式抽检并由使用者复核，结果受规则覆盖范围限制。"]
+    ]
+  },
   coldchain:{
     name:"冷链运输追溯台",version:"v1.0",sector:["logistics","iot"],roles:["iot","data","backend","web"],stack:"JavaScript / Node.js / SQLite / 时序数据",
     run:"coldchain-run.zip",mainURL:"demos/coldchain/index.html?v=1.0",extras:[["本机追溯台","http://127.0.0.1:8830/"]],

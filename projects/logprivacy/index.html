@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <base href="../../index.html">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#171c20">
+  <meta name="author" content="李子衡">
+  <meta name="description" content="李子衡的日志隐私抽检台。对照基线与候选规则，复核敏感值漏遮和排障字段误遮，在本机导出审查结果。">
+  <title>日志隐私抽检台 · 李子衡的个人博客</title>
+  <link rel="canonical" href="https://fate788.github.io/personal-blog/projects/logprivacy/index.html">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="blog.css?rev=10">
+  <link rel="stylesheet" href="samples.css?rev=15">
+  <link rel="stylesheet" href="project-detail.css?rev=22">
+  <script defer src="github-links.js?rev=25"></script>
+  <script defer src="projects.js?rev=29"></script>
+  <script defer src="samples.js?rev=28"></script>
+  <script defer src="project-detail.js?rev=28"></script>
+  <script defer src="blog.js?rev=30"></script>
+</head>
+<body>
+  <a href="projects/logprivacy/index.html#content" class="skip">跳到正文</a>
+  <header class="mast"><div class="shell mast-inner">
+    <a href="#home" class="identity" aria-label="李子衡的个人博客，首页"><span class="signature" aria-hidden="true"><i></i><i></i><i></i></span><strong>李子衡</strong><span class="brand-extra">个人博客</span></a>
+    <nav aria-label="博客导航"><a href="#home" data-page="home">首页</a><a href="#projects" data-page="projects" aria-current="page">作品</a><a href="#notes" data-page="notes">文章</a><a href="#contact" data-page="contact">联系</a></nav>
+    <address class="mast-contact" aria-label="联系李子衡">
+      <a href="mailto:1316241517@qq.com"><span>邮箱</span>1316241517@qq.com</a>
+      <a href="tel:19137523310"><span>电话</span>19137523310</a>
+      <a rel="me" href="https://github.com/fate788"><span>GitHub</span><b>@fate788</b></a>
+    </address>
+  </div></header>
+  <div class="category-band" hidden><nav class="category-strip shell" aria-label="项目分类" id="categories"></nav></div>
+  <main id="content" class="shell" tabindex="-1" data-project="logprivacy">
+    <article class="pd-case pd-logprivacy">
+      <nav class="pd-crumb" aria-label="面包屑"><a href="#home">首页</a><span aria-hidden="true">/</span><a href="#projects">作品</a><span aria-hidden="true">/</span><span aria-current="page">日志隐私抽检台</span></nav>
+      <div class="pd-lead">
+        <header class="pd-intro">
+          <p class="pd-topic"><span>应用安全与隐私</span><span>v1.0</span></p>
+          <h1>日志隐私抽检台</h1>
+          <p class="pd-summary">用同一批 JSONL 日志复跑两套脱敏规则，逐字段检查遗漏的敏感值和误遮的排障信息。</p>
+          <dl class="pd-facts"><div><dt>技术栈</dt><dd>JavaScript / Node.js / JSONL / GitHub Actions</dd></div>
+            <div><dt>GitHub</dt><dd><a class="repo-link" href="https://github.com/fate788/log-privacy-review">fate788 / log-privacy-review</a></dd></div></dl>
+          <div class="pd-actions"><a class="pd-product" href="demos/logprivacy/index.html?v=1.0">打开抽检台<span aria-hidden="true">↗</span></a><a class="pd-cta" href="demos/logprivacy/index.html?v=1.0&amp;view=baseline">查看基线发现<span aria-hidden="true">↗</span></a><a class="pd-read" href="source/logprivacy/index.html">在线读源码<span aria-hidden="true">↗</span></a></div>
+        </header>
+        <figure class="pd-gallery" aria-label="产品实屏">
+          <a class="screenbtn pd-screen" href="images/logprivacy-main.webp?v=v1.0"><img src="images/logprivacy-main.webp?v=v1.0" alt="样例日志的基线规则与候选规则抽检结果"></a>
+          <figcaption class="pd-caption">基线漏遮 3 处、误遮 13 处。候选规则在同一批标注样例中两项均为 0。</figcaption>
+        </figure>
+      </div>
+    </article>
+  </main>
+  <footer class="foot"><div class="shell foot-inner"><div><a href="#home"><b>李子衡的个人博客</b></a><span>计算机专业学生</span></div></div></footer>
+  <dialog id="gallery" aria-label="产品截图">
+    <div class="dialog-bar"><span id="photo-caption"></span><div class="gallery-actions">
+      <button type="button" id="gallery-size" aria-controls="photo-viewport">原始尺寸</button>
+      <button type="button" id="close-gallery">关闭大图</button>
+    </div></div>
+    <div id="photo-viewport" tabindex="0" role="region" aria-label="截图，可滚动查看"><img id="photo" alt=""></div>
+  </dialog>
+</body>
+</html>
