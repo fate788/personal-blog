@@ -51,7 +51,7 @@ function card(id,p,{role="",group,archive=false,heading="h3"}={}){
   const shownRole=role || p.roles.find(key=>!group||group.roles.includes(key));
   const description=group || role?p.proof[shownRole]:p.pitch;
   return `<article class="card">
-    <div class="study-art"><img src="images/${id}-study.webp" width="960" height="480" alt=""></div>
+    <div class="study-art"><img src="images/${id}-study.webp?v=${p.version}" width="960" height="480" alt=""></div>
     <div class="card-body">
       <${heading} class="project-title"><a href="${caseLink(id)}">${p.name}<span class="card-arrow" aria-hidden="true">→</span></a></${heading}>
       <p>${description}</p>

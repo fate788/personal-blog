@@ -18,6 +18,10 @@ assert(inventoryManifest.icons.some(icon => icon.sizes === "512x512"), "Missing 
 for (const {src} of inventoryManifest.icons) {
   assert(statSync(path.join(site, inventoryDemo, src)).isFile(), `Missing inventory icon ${src}`);
 }
+for (const image of ["hero.webp", "scan-station.webp"]) {
+  const photo = readFileSync(path.join(site, inventoryDemo, image));
+  assert.equal(photo.subarray(8, 12).toString("ascii"), "WEBP", `Invalid inventory photo ${image}`);
+}
 for (const page of pages) {
   const html = readFileSync(path.join(site, page), "utf8");
   const baseTag = html.match(/<base href="([^"]+)">/);

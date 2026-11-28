@@ -16,7 +16,7 @@ industryNames.collaboration = "研发协作";
 industryNames.enterprise = "企业内部平台";
 const projects = {
   inventory:{
-    name:"移动盘点工作台",version:"v1.0",sector:["logistics"],roles:["mobile","backend","web"],stack:"可安装 Web 应用（PWA） / IndexedDB / Node.js / SQLite",
+    name:"移动盘点工作台",version:"v1.1",sector:["logistics"],roles:["mobile","backend","web"],stack:"可安装 Web 应用（PWA） / IndexedDB / Node.js / SQLite",
     run:"inventory-run.zip",mainURL:"demos/inventory/index.html",extras:[["本机工作台","http://127.0.0.1:8808/"]],
     pitch:"仓员现场盲盘，断网时仍可保存实点数量。复联后补传，主管对照两条原记录和账面数量复核差异。",
     evidence:"A01 的胶带按两份独立记录复核。第一位盘点员报 23 卷，第二位报 24 卷，主管复点确认 24 卷，两份记录仍可核对。",
