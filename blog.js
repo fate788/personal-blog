@@ -15,7 +15,7 @@ const codePaths={manual:["engine.py",372],campus:["src/main/java/cn/campus/event
 const deepCode=id=>source(id)+"#"+new URLSearchParams({file:codePaths[id][0],line:codePaths[id][1]});
 const runtime={manual:"在线版可直接使用，手册和问题保存在当前浏览器。本地版需要 Python 3.10 或以上，解压后运行 start-manual.cmd 或 python server.py，默认端口 8799。手册版本和问题记录保存在 SQLite，可接本地模型。",campus:"Java 17 或以上，解压后运行 start-review.cmd，默认端口 8768。",ledger:"Python 3.10 或以上，解压后运行 start-review.cmd，默认端口 8792。",incident:"Python 3.10 或以上，解压后运行 start-incident.cmd，默认端口 8793。隔离演练可独立使用。",clinic:"解压后在项目目录运行 python server.py，默认端口 8796。排班和预约使用合成演示数据。"};
 const captions={
-  searchlab:["顾客试搜桌面用品，可以切换商品分类、价格和有货条件。","按查询核对基线和候选的排名、商品相关性与指标差值。"],
+  searchlab:["顾客按类目浏览商品规格，可以进详情核对参数。商品照片为生成的场景素材。","按查询核对基线和候选的排名、商品相关性与指标差值。"],
   inventory:["手机盘点可按库位查找商品和录入数量，掉线后先把新记录保存在待同步队列。","主管对照账面和两份实点记录，录入最终数量并保留复核依据。"],
   funnel:["报名转化总览，按活动、设备和转化窗口对比三步漏斗。","从报名漏斗打开流失访客名单，可查看具体访客的原始事件。"],
   access:["申请人首页，可选择内部报表并发起限时访问申请。","审计记录可核对申请、批准、报表读取、到期和拒绝访问。"],
@@ -36,7 +36,7 @@ runtime.review = "浏览器演示可直接打开，使用虚构的 IT 服务台�
 runtime.access = "在线版使用虚构报表和浏览器演练数据。Node.js 22.13 或以上版本可启动 SQLite 服务，也可配置团队账号与自己的资源。";
 runtime.funnel = "公开版在浏览器中使用合成样本，可亲自报名。完整运行包需要 Node.js 22.13 或以上版本，按 README 启动分析服务和校园场务联动。";
 runtime.inventory = "公开版是同一浏览器内的独立盘点演练，可切换身份并模拟断网。本机版需要 Node.js 22.13 或以上版本，支持独立账号、SQLite 和浏览器离线队列，配置见项目 README。";
-runtime.searchlab = "公开版可直接搜索、筛选并查看固定样例的评测。商品和查询标注为合成演示数据。完整运行包需要 Node.js 20 或以上版本，解压后运行 start-search.cmd 或 node server.mjs。";
+runtime.searchlab = "公开版可直接搜索、筛选、查看商品详情并复跑评测。商品和查询标注为合成演示数据。完整运行包需要 Node.js 20 或以上版本，解压后运行 start-search.cmd 或 node server.mjs。";
 const textLink=(url,label)=>'<a class="textlink" href="'+url+'">'+label+'</a>';
 const button=(url,label,primary=false,download=false)=>'<a class="button'+(primary?' primary':'')+'" href="'+url+'"'+(download?' download':'')+'>'+label+'</a>';
 const routeTo=(role="",industry="",group="")=>{

@@ -379,15 +379,16 @@
 
   function searchlab(root) {
     const query = encodeURIComponent("屏幕挂灯");
+    const demo = projects.searchlab.mainURL;
     const shop = tag("a", "button primary", "试搜屏幕挂灯 ↗");
-    shop.href = "demos/searchlab/index.html#shop?q=" + query;
+    shop.href = demo + "#shop?q=" + query;
     const evaluation = tag("a", "button", "查看同词的排序对照 ↗");
-    evaluation.href = "demos/searchlab/index.html#evaluation?q=" + query;
+    evaluation.href = demo + "#evaluation?q=" + query;
     const wrongHit = tag("a", "textlink", "查看一次误召回 ↗");
-    wrongHit.href = "demos/searchlab/index.html#evaluation?q=hdmi-splitter&outcome=more-unrelated";
+    wrongHit.href = demo + "#evaluation?q=hdmi-splitter&outcome=more-unrelated";
     const actions = tag("div", "linkrow");
     actions.append(shop, evaluation, wrongHit);
-    root.append(tag("p", "pbs-intro", "先在商店试搜“屏幕挂灯”。再打开同词的排序对照，检查目录里的显示器挂灯是怎样被找到的。"), actions);
+    root.append(tag("p", "pbs-intro", "先在商店试搜“屏幕挂灯”，打开结果核对商品参数。切到同词的排序对照，看目录里的显示器挂灯是怎样被找到的。"), actions);
   }
 
   const samples = { campus, ledger, incident, clinic, manual, review, access, funnel, inventory, searchlab };
