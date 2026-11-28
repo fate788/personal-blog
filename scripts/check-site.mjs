@@ -25,6 +25,10 @@ for (const image of ["hero.webp", "scan-station.webp"]) {
   const photo = readFileSync(path.join(site, inventoryDemo, image));
   assert.equal(photo.subarray(8, 12).toString("ascii"), "WEBP", `Invalid inventory photo ${image}`);
 }
+for (const image of ["hero-red", "department-desk", "department-input", "department-power", "department-lighting"]) {
+  const photo = readFileSync(path.join(site, "demos/searchlab/media", `${image}.webp`));
+  assert.equal(photo.subarray(8, 12).toString("ascii"), "WEBP", `Invalid shop photo ${image}`);
+}
 for (const page of pages) {
   const html = readFileSync(path.join(site, page), "utf8");
   const baseTag = html.match(/<base href="([^"]+)">/);

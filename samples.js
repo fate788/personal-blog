@@ -388,7 +388,7 @@
     wrongHit.href = demo + "#evaluation?q=hdmi-splitter&outcome=more-unrelated";
     const actions = tag("div", "linkrow");
     actions.append(shop, evaluation, wrongHit);
-    root.append(tag("p", "pbs-intro", "先在商店试搜“屏幕挂灯”，打开结果核对商品参数。切到同词的排序对照，看目录里的显示器挂灯是怎样被找到的。"), actions);
+    root.append(tag("p", "pbs-intro", "先在商店试搜“屏幕挂灯”，对比三种规格，再把有现货的款式加入购物袋。切到同词的排序对照，看这些挂灯是怎样被找到的。"), actions);
   }
 
   const samples = { campus, ledger, incident, clinic, manual, review, access, funnel, inventory, searchlab };

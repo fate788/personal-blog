@@ -16,12 +16,12 @@ industryNames.enterprise = "企业内部平台";
 industryNames.commerce = "电商零售";
 const projects = {
   searchlab:{
-    name:"商品搜索实验台",version:"v1.1",sector:["commerce"],roles:["algo","web"],stack:"JavaScript / Node.js / 相关性评测",
-    run:"searchlab-run.zip",mainURL:"demos/searchlab/index.html?v=1.1",evaluationURL:"demos/searchlab/index.html?v=1.1#evaluation",extras:[["本机实验台","http://127.0.0.1:8818/"]],
-    pitch:"顾客按品名、口语或货号搜索，从结果里的规格挑选桌面用品。运营用同一批查询核对召回和排序差异。",
+    name:"商品搜索实验台",version:"v1.2",sector:["commerce"],roles:["algo","web"],stack:"JavaScript / Node.js / 相关性评测",
+    run:"searchlab-run.zip",mainURL:"demos/searchlab/index.html?v=1.2",evaluationURL:"demos/searchlab/index.html?v=1.2#evaluation",extras:[["本机实验台","http://127.0.0.1:8818/"]],
+    pitch:"顾客边输入边看搜索建议，从规格对比到购物袋完成桌面用品选购。运营用同一批查询核对召回和排序差异。",
     evidence:"56 件商品、23 条合成查询。19 条有相关商品的查询上，nDCG@5 从 0.246 升至 0.979。候选也增加了误召回，逐条对照可核查。",
-    features:[["按规格挑商品","用网格浏览商品照片，用列表对照功率、连接方式或尺寸。打开详情查看完整参数。"],["比较同类商品","最多选择三件同类商品，同时核对规格、价格和库存。"],["重跑排序对照","用同一套目录和相关性标注比较 nDCG@5、MRR@5 与无结果数，导出逐条对照 CSV。"]],
-    proof:{algo:"把检索算法和固定标注分开。用相同查询比较两种召回和排序方案，逐条追查指标变化。",web:"列表和网格按类目展示决定购买的规格，详情和同类比较补足产品信息。"},
+    features:[["搜索和对比","查看输入提示，从列表核对型号、功率、接口和尺寸。最多并排比较三件同类商品。"],["加入购物袋","调整商品数量并核对小计，购物袋保存在当前浏览器。"],["重跑排序对照","查看固定标注的排序报告或输入自定义词单独对照前五位命中。固定评测可以导出 CSV。"]],
+    proof:{algo:"把检索算法和固定标注分开。用相同查询比较两种召回和排序方案，逐条追查指标变化。",web:"商品目录支持即时搜索建议、规格对比和购物袋。购物袋按当前目录校验库存、限制数量，并在浏览器中保留选购记录。"},
     note:"一条电商搜索词，怎么判断排序改得好不好？",
     teaser:"从顾客的口语查询出发，用人工标注、前五名对照和可复跑指标检查搜索改动。",
     parts:[
