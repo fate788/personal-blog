@@ -393,13 +393,13 @@
 
   function apiregression(root) {
     const demo = projects.apiregression.mainURL;
-    const first = tag("a", "button primary", "检查首轮阻断项 ↗");
-    first.href = demo + "&candidate=candidate-a";
+    const first = tag("a", "button primary", "查看订单金额断言 ↗");
+    first.href = demo + "&candidate=candidate-a&case=order-detail&path=%24.data.amountCents";
     const second = tag("a", "button", "运行修订版本 ↗");
     second.href = demo + "&candidate=candidate-b";
     const actions = tag("div", "linkrow");
     actions.append(first, second);
-    root.append(tag("p", "pbs-intro", "先用首轮候选版查看订单金额的类型差异，再运行修订版，核对通过结果和仍允许的变化。"), actions);
+    root.append(tag("p", "pbs-intro", "先打开订单金额断言，对照两版原始 JSON，再运行修订版核对放行结论和允许的变更。"), actions);
   }
 
   const samples = { campus, ledger, incident, clinic, manual, review, access, funnel, inventory, searchlab, apiregression };

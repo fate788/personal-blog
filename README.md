@@ -6,7 +6,7 @@
 
 | 作品 | 可以体验的内容 | 独立源码仓库 |
 | --- | --- | --- |
-| 接口回归验收台 | [核对订单接口的两份响应](https://fate788.github.io/personal-blog/demos/apiregression/index.html)，定位导致发布受阻的字段并复跑修订版 | [api-regression-lab](https://github.com/fate788/api-regression-lab) |
+| 接口回归验收台 | [打开发布评审](https://fate788.github.io/personal-blog/demos/apiregression/index.html?v=1.1)，筛查阻断用例，对照两版响应证据并复跑修订版 | [api-regression-lab](https://github.com/fate788/api-regression-lab) |
 | 商品搜索实验台 | [试搜桌面用品](https://fate788.github.io/personal-blog/demos/searchlab/index.html?v=1.2)，体验搜索建议、规格对比和购物袋，在评测台逐词核对排序 | [shop-search-lab](https://github.com/fate788/shop-search-lab) |
 | 移动盘点工作台 | [体验断网盘点与差异复核](https://fate788.github.io/personal-blog/demos/inventory/)，录入两份实点并追查复核依据 | [mobile-inventory](https://github.com/fate788/mobile-inventory) |
 | 产品转化分析台 | [查看活动报名漏斗](https://fate788.github.io/personal-blog/demos/funnel/)，体验一次隔离报名并核对自己的新事件 | [product-funnel](https://github.com/fate788/product-funnel) |

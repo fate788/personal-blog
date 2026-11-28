@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#171c20">
   <meta name="author" content="李子衡">
-  <meta name="description" content="李子衡的接口回归验收台。对照两版订单接口，定位导致发布受阻的 HTTP 与 JSON 差异。">
+  <meta name="description" content="李子衡的接口回归验收台。查看发布评审结论，筛查阻断用例，并定位两版订单接口的响应差异。">
   <title>接口回归验收台 · 李子衡的个人博客</title>
   <link rel="canonical" href="https://fate788.github.io/personal-blog/projects/apiregression/index.html">
   <link rel="icon" href="data:,">
@@ -14,10 +14,10 @@
   <link rel="stylesheet" href="samples.css?rev=15">
   <link rel="stylesheet" href="project-detail.css?rev=20">
   <script defer src="github-links.js?rev=23"></script>
-  <script defer src="projects.js?rev=26"></script>
-  <script defer src="samples.js?rev=25"></script>
-  <script defer src="project-detail.js?rev=25"></script>
-  <script defer src="blog.js?rev=27"></script>
+  <script defer src="projects.js?rev=27"></script>
+  <script defer src="samples.js?rev=26"></script>
+  <script defer src="project-detail.js?rev=26"></script>
+  <script defer src="blog.js?rev=28"></script>
 </head>
 <body>
   <a href="projects/apiregression/index.html#content" class="skip">跳到正文</a>
@@ -36,16 +36,16 @@
       <nav class="pd-crumb" aria-label="面包屑"><a href="#home">首页</a><span aria-hidden="true">/</span><a href="#projects">作品</a><span aria-hidden="true">/</span><span aria-current="page">接口回归验收台</span></nav>
       <div class="pd-lead">
         <header class="pd-intro">
-          <p class="pd-topic"><span>接口测试与发布验收</span><span>v1.0</span></p>
+          <p class="pd-topic"><span>接口测试与发布验收</span><span>v1.1</span></p>
           <h1>接口回归验收台</h1>
-          <p class="pd-summary">用同一批订单接口请求对照基线和候选版，检查状态码、字段类型与业务值，并定位到具体 JSON 路径。</p>
+          <p class="pd-summary">在同一工作台查看基线、候选版本和放行结论。搜索用例并核对原始响应，也可用链接把具体断言发给同事。</p>
           <dl class="pd-facts"><div><dt>技术栈</dt><dd>JavaScript / Node.js / HTTP / GitHub Actions</dd></div>
             <div><dt>GitHub</dt><dd><a class="repo-link" href="https://github.com/fate788/api-regression-lab">fate788 / api-regression-lab</a></dd></div></dl>
-          <div class="pd-actions"><a class="pd-product" href="demos/apiregression/index.html?v=1.0">打开验收台<span aria-hidden="true">↗</span></a><a class="pd-cta" href="demos/apiregression/index.html?v=1.0&amp;candidate=candidate-b">运行修订版<span aria-hidden="true">↗</span></a><a class="pd-read" href="source/apiregression/index.html">在线读源码<span aria-hidden="true">↗</span></a></div>
+          <div class="pd-actions"><a class="pd-product" href="demos/apiregression/index.html?v=1.1">打开验收台<span aria-hidden="true">↗</span></a><a class="pd-cta" href="demos/apiregression/index.html?v=1.1&amp;candidate=candidate-b">运行修订版<span aria-hidden="true">↗</span></a><a class="pd-read" href="source/apiregression/index.html">在线读源码<span aria-hidden="true">↗</span></a></div>
         </header>
         <figure class="pd-gallery" aria-label="产品实屏">
-          <a class="screenbtn pd-screen" href="images/apiregression-main.webp?v=v1.0"><img src="images/apiregression-main.webp?v=v1.0" alt="首轮候选版的接口回归验收结果"></a>
-          <figcaption class="pd-caption">首轮候选版的 10 个订单回归用例中有 5 个被阻断。打开详情可查看两版响应。</figcaption>
+          <a class="screenbtn pd-screen" href="images/apiregression-main.webp?v=v1.1"><img src="images/apiregression-main.webp?v=v1.1" alt="新版发布评审、验收用例和响应证据界面"></a>
+          <figcaption class="pd-caption">发布评审并列展示两个版本的验收结论，左侧可搜索用例或筛查阻断项。</figcaption>
         </figure>
       </div>
     </article>

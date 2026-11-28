@@ -15,7 +15,7 @@ const codePaths={manual:["engine.py",372],campus:["src/main/java/cn/campus/event
 const deepCode=id=>source(id)+"#"+new URLSearchParams({file:codePaths[id][0],line:codePaths[id][1]});
 const runtime={manual:"在线版可直接使用，手册和问题保存在当前浏览器。本地版需要 Python 3.10 或以上，解压后运行 start-manual.cmd 或 python server.py，默认端口 8799。手册版本和问题记录保存在 SQLite，可接本地模型。",campus:"Java 17 或以上，解压后运行 start-review.cmd，默认端口 8768。",ledger:"Python 3.10 或以上，解压后运行 start-review.cmd，默认端口 8792。",incident:"Python 3.10 或以上，解压后运行 start-incident.cmd，默认端口 8793。隔离演练可独立使用。",clinic:"解压后在项目目录运行 python server.py，默认端口 8796。排班和预约使用合成演示数据。"};
 const captions={
-  apiregression:["订单服务第一候选版的验收结果，10 个用例中有 5 个被阻断。","订单详情两边都返回 200，金额在基线中是数字，在候选中是字符串。"],
+  apiregression:["发布评审并列展示两个版本的验收结论，左侧可搜索用例或筛查阻断项。","两版订单详情均返回 HTTP 200。断言并排显示基线数字 29900 和候选字符串，并高亮 JSON 原文。"],
   searchlab:["桌面用品商店支持类目浏览、搜索建议、型号对比及购物袋。商品图片为生成的示意图。","按查询核对基线和候选的排名、商品相关性与指标差值。"],
   inventory:["手机盘点可按库位查找商品和录入数量，掉线后先把新记录保存在待同步队列。","主管对照账面和两份实点记录，录入最终数量并保留复核依据。"],
   funnel:["报名转化总览，按活动、设备和转化窗口对比三步漏斗。","从报名漏斗打开流失访客名单，可查看具体访客的原始事件。"],
