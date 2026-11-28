@@ -435,7 +435,18 @@
     root.append(tag("p", "pbs-intro", "先看排满的常规周，再复核周日晚班缺口。恢复专席可用日期后可重算。"), actions);
   }
 
-  const samples = { campus, ledger, incident, clinic, manual, review, access, funnel, inventory, searchlab, apiregression, coldchain, logprivacy, roster };
+  function lineage(root) {
+    const demo = projects.lineage.mainURL;
+    const block = tag("a", "button primary", "追查金额字段影响 ↗");
+    block.href = demo;
+    const safe = tag("a", "button", "查看未引用字段 ↗");
+    safe.href = demo + "&case=unused";
+    const actions = tag("div", "linkrow");
+    actions.append(block, safe);
+    root.append(tag("p", "pbs-intro", "从金额字段追到看板，再用旧备注对照什么情况下清单中没有下游。"), actions);
+  }
+
+  const samples = { campus, ledger, incident, clinic, manual, review, access, funnel, inventory, searchlab, apiregression, coldchain, logprivacy, roster, lineage };
   window.mountProjectSample = function (element, projectId) {
     if (!element) return;
     const root = tag("div", "pbs-sample");

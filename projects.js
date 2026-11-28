@@ -15,6 +15,20 @@ industryNames.collaboration = "研发协作";
 industryNames.enterprise = "企业内部平台";
 industryNames.commerce = "电商零售";
 const projects = {
+  lineage:{
+    name:"数据血缘影响台",version:"v1.0",sector:["commerce","enterprise"],roles:["data","backend","qa"],stack:"JavaScript / Node.js / 列级 DAG / JSON",
+    run:"lineage-run.zip",mainURL:"demos/lineage/index.html?v=1.0",extras:[],
+    pitch:"上游字段变更前，沿列级依赖定位会受影响的数据表、指标和看板，保留路径证据与负责人。",
+    evidence:"退役订单金额字段会影响 6 项资产、8 个字段。退役旧备注时，已登记清单没有下游引用。",
+    features:[["变更对照","比较退役金额、调整类型与退役旧备注三种情景，检查阻断、待复核和通过的依据。"],["字段路径","选择受影响资产，逐段查看输入、输出和计算、筛选等依赖关系。"],["导入与复跑","导入自己的清单和变更方案，下载报告。CLI 复跑与浏览器一致的判断。"]],
+    proof:{data:"校验 DAG 和字段引用，按变更来源汇总可达字段并回溯最短证据路径。",backend:"浏览器和命令行共享严格输入校验、风险分类和数据报告。",qa:"用合成变更覆盖阻断、待复核、通过以及同一消费者合并多个来源。"},
+    note:"退役一列之前，先找它的下游",teaser:"同一张订单表里的金额与备注字段，影响范围可以完全不同。",
+    parts:[
+      ["把表级关系细化到列","订单金额流入事实表、营收汇总、指标和看板。列级清单记录输出字段依赖的具体输入列。"],
+      ["保留逐段证据","字段变更触及 6 项资产。选择一项看板可沿路径追到输入列，定位加工关系和对应负责人。"],
+      ["按清单界定结果","未引用备注没有登记中的下游。可导入新的清单或使用命令行复跑，判断取决于登记覆盖。"]
+    ]
+  },
   roster:{
     name:"客服排班工作台",version:"v1.0",sector:["support","enterprise"],roles:["optimization","web","backend"],stack:"JavaScript / Node.js / 最小费用流 / CSV",
     run:"roster-run.zip",mainURL:"demos/roster/index.html?v=1.0",extras:[],

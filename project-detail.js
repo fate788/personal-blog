@@ -2,6 +2,14 @@
   "use strict";
 
   const cases = {
+    lineage: {
+      category:"数据工程与指标治理",audience:"数据模型、指标和业务看板维护人员",
+      summary:"把字段变更与登记的血缘放在一起检查，核对受影响的表、指标和看板，明确每次连带影响的证据。",
+      images:["变更影响与血缘总览","下游字段路径证据"],
+      process:[["运行字段退役案例","检查金额字段退役的受影响字段和资产。"],["核对字段证据","选择看板或模型，查看每一段的输入、输出和依赖关系。"],["对照另两种变更","查看未引用备注与金额改类型。导入自己的血缘清单后可下载复核报告。"]],
+      testTitle:"退役订单金额会影响哪些资产？",result:"6",unit:"项",resultLabel:"退役金额字段涉及的下游资产",
+      resultText:"8 个下游字段使用了该列，覆盖数据表、营收指标及交易和财务看板。退役旧备注时登记清单没有下游引用。"
+    },
     roster: {
       category:"运筹优化与客服运营",audience:"客服班组长及运营排班人员",
       summary:"根据技能、请假和周班次上限求解一周班表。遇到临时缺岗时复核可用人员，保留已确认的分配再重算。",
@@ -210,6 +218,7 @@
     if (id === "coldchain") return `<a class="pd-product" href="${p.mainURL}">打开运输追溯<span aria-hidden="true">↗</span></a><a class="pd-cta" href="${p.mainURL}&amp;trip=cc-1026">查看断报车次<span aria-hidden="true">↗</span></a>`;
     if (id === "logprivacy") return `<a class="pd-product" href="${p.mainURL}">打开抽检台<span aria-hidden="true">↗</span></a><a class="pd-cta" href="${p.mainURL}&amp;view=baseline">查看基线发现<span aria-hidden="true">↗</span></a>`;
     if (id === "roster") return `<a class="pd-product" href="${p.mainURL}">打开排班台<span aria-hidden="true">↗</span></a><a class="pd-cta" href="${p.mainURL}&amp;case=absence">查看请假缺口<span aria-hidden="true">↗</span></a>`;
+    if (id === "lineage") return `<a class="pd-product" href="${p.mainURL}">打开影响分析<span aria-hidden="true">↗</span></a><a class="pd-cta" href="${p.mainURL}&amp;case=unused">查看未引用字段<span aria-hidden="true">↗</span></a>`;
     if (id === "apiregression") return `<a class="pd-product" href="${p.mainURL}">打开验收台<span aria-hidden="true">↗</span></a><a class="pd-cta" href="${p.mainURL}&amp;candidate=candidate-b">运行修订版<span aria-hidden="true">↗</span></a>`;
     if (id === "manual") return `<a class="pd-product" href="${p.mainURL}">打开支持工作台<span aria-hidden="true">↗</span></a>`;
     if (id === "review") return `<a class="pd-product" href="${p.mainURL}">打开演示工作台<span aria-hidden="true">↗</span></a>`;
@@ -237,7 +246,7 @@
             ${id==="funnel"?'<div><dt>接入项目</dt><dd><a href="#project/campus">校园场务</a></dd></div>':""}
             ${id==="campus"?'<div><dt>报名分析</dt><dd><a href="#project/funnel">产品转化分析台</a></dd></div>':""}
           </dl>
-          <div class="pd-actions">${productAction(id, p)}${["access","funnel","inventory","searchlab","apiregression","coldchain","logprivacy","roster"].includes(id)?"":`<a class="pd-cta" href="${sampleLink(id)}">体验交互样例<span aria-hidden="true">↓</span></a>`}<a class="pd-read" href="${source(id)}">在线读源码<span aria-hidden="true">↗</span></a></div>
+          <div class="pd-actions">${productAction(id, p)}${["access","funnel","inventory","searchlab","apiregression","coldchain","logprivacy","roster","lineage"].includes(id)?"":`<a class="pd-cta" href="${sampleLink(id)}">体验交互样例<span aria-hidden="true">↓</span></a>`}<a class="pd-read" href="${source(id)}">在线读源码<span aria-hidden="true">↗</span></a></div>
         </header>
         ${galleryMarkup(id, record)}
       </div>
@@ -247,7 +256,7 @@
       <div class="pd-explore">
         <section class="pd-sample" id="sample" aria-labelledby="pd-sample-heading"><h2 id="pd-sample-heading">交互样例</h2><div id="sample-slot"></div>${serviceLinks(p)}</section>
         <aside class="pd-evidence" aria-labelledby="pd-evidence-title">
-          <p class="pd-label">${["funnel","inventory","searchlab","apiregression","coldchain","logprivacy","roster"].includes(id)?"合成样例":"本机验证记录"}</p><h2 id="pd-evidence-title">${record.testTitle}</h2>
+          <p class="pd-label">${["funnel","inventory","searchlab","apiregression","coldchain","logprivacy","roster","lineage"].includes(id)?"合成样例":"本机验证记录"}</p><h2 id="pd-evidence-title">${record.testTitle}</h2>
           <div class="pd-measure"><strong>${record.result}</strong><span>${record.unit}</span></div>
           <p class="pd-measure-label">${record.resultLabel}</p><p class="pd-evidence-text">${record.resultText}</p>
         </aside>
